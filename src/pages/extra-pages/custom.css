@@ -1,0 +1,10 @@
+.sweet-alert-container {
+  z-index: 9999;
+  /* Set a high z-index value */
+}
+
+/* styles.css */
+.MuiDataGrid-root .MuiDataGrid {
+  color: black;
+  /* Change text color to black */
+}

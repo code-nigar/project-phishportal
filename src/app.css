@@ -1,0 +1,40 @@
+.swal2-container {
+    z-index: 20000 !important;
+}
+.main-page {
+    background-image: radial-gradient(ellipse at center, rgba(245, 246, 252, 0), rgba(0, 0, 0, 0.73), black),
+        url('/src//assets//images/myImages/background.jpg') !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.auth-glass {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.3px);
+    -webkit-backdrop-filter: blur(4.3px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  /* Track */
+  /* ::-webkit-scrollbar-track {
+    background: #rgb(36, 41, 57); 
+  } */
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #bebebe; 
+    border-radius:3px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #626262; 
+  }
