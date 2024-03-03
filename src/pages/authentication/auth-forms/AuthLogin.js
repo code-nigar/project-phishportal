@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 // material-ui
-import { Button, FormHelperText, Grid, Link, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack } from '@mui/material';
+import { FormHelperText, Grid, Link, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack } from '@mui/material';
+import { Button } from 'react-bootstrap'
 import LinearProgress from '@mui/material/LinearProgress';
 import Snackbar from '@mui/material/Snackbar';
 
@@ -79,7 +80,10 @@ const AuthLogin = () => {
     return (
         <>
             {notify && (
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Snackbar open={open} autoHideDuration={9000} onClose={handleClose} 
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} 
+                style={{ width: '85%' }}
+                >
                     <Alert severity="error" sx={{ width: '100%' }} onClose={handleClose} style={{ color: 'white' }}>
                         Wrong Email or Password!
                     </Alert>
@@ -115,9 +119,9 @@ const AuthLogin = () => {
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="email-login" sx={{ color: 'white' }}>
+                                    {/* <InputLabel htmlFor="email-login">
                                         Username/Email
-                                    </InputLabel>
+                                    </InputLabel> */}
                                     <OutlinedInput
                                         id="email-login"
                                         type="email"
@@ -139,9 +143,9 @@ const AuthLogin = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="password-login" sx={{ color: 'white' }}>
+                                    {/* <InputLabel htmlFor="password-login">
                                         Password
-                                    </InputLabel>
+                                    </InputLabel> */}
                                     <OutlinedInput
                                         fullWidth
                                         error={Boolean(touched.password && errors.password)}
@@ -175,7 +179,7 @@ const AuthLogin = () => {
                                 </Stack>
                             </Grid>
 
-                            <Grid item xs={12} sx={{ mt: -1 }}>
+                            <Grid item xs={12} >
                                 {/* <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={2}>
                                      <FormControlLabel /> 
                                     <Link variant="h6" component={RouterLink} to="" color="text.primary">
@@ -188,27 +192,12 @@ const AuthLogin = () => {
                                     <FormHelperText error>{errors.submit}</FormHelperText>
                                 </Grid>
                             )}
-                            <Grid item xs={12}>
-                                <AnimateButton>
+                            <Grid container direction="row" justifyContent="center" alignItems="center" sx={{ marginBottom: '25px'}} >
                                     <Button
-                                        disableElevation
-                                        disabled={isSubmitting || loader}
-                                        fullWidth
-                                        size="large"
                                         type="submit"
-                                        variant="contained"
-                                        sx={{
-                                            backgroundColor: '#093e4a',
-                                            ':hover': {
-                                                bgcolor: '#0f6376',
-                                                color: 'white'
-                                            }
-                                        }}
                                     >
                                         Login
                                     </Button>
-                                    {loader && <LinearProgress />}
-                                </AnimateButton>
                             </Grid>
                             {/* <Grid item xs={12}>
                                 <Divider>

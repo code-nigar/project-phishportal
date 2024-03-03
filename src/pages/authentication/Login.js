@@ -6,6 +6,7 @@ import { Grid, Stack, Typography } from '@mui/material';
 // project import
 import AuthLogin from './auth-forms/AuthLogin';
 import AuthWrapper from './AuthWrapper';
+import Logo from 'components/Logo';
 
 // ================================|| LOGIN ||================================ //
 
@@ -13,8 +14,9 @@ const Login = () => (
     <AuthWrapper>
         <Grid container spacing={3}>
             <Grid item xs={12}>
-                <Stack direction="row" justifyContent="center" alignItems="baseline" sx={{ mb: { xs: -0.5, sm: 0.5 } }}>
-                    <Typography variant="h3" sx={{ color: 'white' }}>
+                <Stack direction="column" justifyContent="center" alignItems="center">
+                    <Logo/>
+                    <Typography variant="h4">
                         Welcome Back
                     </Typography>
                     {/* <Typography component={Link} to="/register" variant="body1" sx={{ textDecoration: 'none' }} color="primary">
