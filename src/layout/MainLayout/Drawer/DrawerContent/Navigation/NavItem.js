@@ -49,8 +49,9 @@ const NavItem = ({ item, level }) => {
         // eslint-disable-next-line
     }, []);
 
-    const textColor = 'text.primary';
-    const iconSelectedColor = 'rgb(88, 173, 198)';
+    const textColor = '#a9b7d0';
+    const iconSelectedColor = '#fff';
+    const itemBgColor = 'rgb(0, 0, 0, 0.2)';
 
     return (
         <ListItemButton
@@ -58,37 +59,36 @@ const NavItem = ({ item, level }) => {
             disabled={item.disabled}
             onClick={() => itemHandler(item.id)}
             selected={isSelected}
-            style={{ color: 'white !important' }}
+            style={{ color: isSelected ? iconSelectedColor : textColor, }}
             sx={{
                 zIndex: 1201,
                 pl: drawerOpen ? `${level * 28}px` : 1.5,
                 py: !drawerOpen && level === 1 ? 1.25 : 1,
                 ...(drawerOpen && {
                     // color: textColor,
-                    color: 'white !important',
+                    color:  isSelected ? iconSelectedColor : textColor,
                     // '&:hover': {
                     //     bgcolor: 'primary.lighter'
                     // },
                     '&.Mui-selected': {
-                        bgcolor: 'rgb(225, 241, 245)',
-                        borderRight: `2px solid rgb(88, 173, 198)`,
+                        bgcolor: itemBgColor,
                         color: iconSelectedColor,
 
                         '&:hover': {
+                            bgcolor: itemBgColor,
                             color: iconSelectedColor,
-                            bgcolor: 'primary.lighter'
                         }
                     }
                 }),
                 ...(!drawerOpen && {
                     '&:hover': {
-                        bgcolor: 'transparent'
+                        bgcolor: itemBgColor
                     },
                     '&.Mui-selected': {
                         '&:hover': {
                             bgcolor: 'transparent'
                         },
-                        bgcolor: 'transparent'
+                        bgcolor: itemBgColor
                     }
                 })
             }}
@@ -105,12 +105,12 @@ const NavItem = ({ item, level }) => {
                             alignItems: 'center',
                             justifyContent: 'center',
                             '&:hover': {
-                                bgcolor: 'secondary.lighter'
+                                bgcolor: itemBgColor
                             }
                         }),
                         ...(!drawerOpen &&
                             isSelected && {
-                                bgcolor: 'primary.lighter',
+                                bgcolor: itemBgColor,
                                 '&:hover': {
                                     bgcolor: 'primary.lighter'
                                 }

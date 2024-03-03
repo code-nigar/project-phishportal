@@ -15,7 +15,7 @@ const DrawerHeader = ({ open }) => {
 
     return (
         // only available in paid version
-        <DrawerHeaderStyled theme={theme} open={open} style={{ backgroundColor: '#242939' }}>
+        <DrawerHeaderStyled theme={theme} open={open} style={{ backgroundColor: '#3f4d67', paddingTop: '10px' }}>
             <Stack direction="row" spacing={1} alignItems="center">
                 <Logo />
                 {/* <Chip

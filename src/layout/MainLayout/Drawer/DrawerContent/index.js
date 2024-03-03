@@ -13,7 +13,8 @@ const DrawerContent = () => (
                 flexDirection: 'column'
             }
         }}
-        style={{ backgroundColor: '#242939', height: '100%' }}
+        className="pc-sidebar"
+        style={{ backgroundColor: '#3f4d67', height: '100vw' }}
     >
         <Navigation />
         {/* <NavCard /> */}

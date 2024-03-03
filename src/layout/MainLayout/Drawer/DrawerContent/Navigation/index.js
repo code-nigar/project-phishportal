@@ -11,7 +11,7 @@ const Navigation = () => {
     const navGroups = menuItem.items.map((item) => {
         switch (item?.type) {
             case 'group':
-                return <NavGroup key={item.id} item={item} style={{ color: 'white ' }} />;
+                return <NavGroup key={item.id} item={item} style={{ color: '#a9b7d0 ' }} />;
             default:
                 return (
                     <Typography key={item.id} variant="h6" color="error" align="center">
@@ -22,7 +22,7 @@ const Navigation = () => {
     });
 
     return (
-        <Box sx={{ pt: 2 }} style={{ color: 'white ' }}>
+        <Box sx={{ pt: 2 }} style={{ color: '#a9b7d0 ' }}>
             {navGroups}
         </Box>
     );

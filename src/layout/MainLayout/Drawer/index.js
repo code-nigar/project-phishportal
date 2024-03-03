@@ -25,7 +25,7 @@ const MainDrawer = ({ open, handleDrawerToggle, window }) => {
     const drawerHeader = useMemo(() => <DrawerHeader open={open} />, [open]);
 
     return (
-        <Box component="nav" sx={{ flexShrink: { md: 0 }, zIndex: 1300 }} aria-label="mailbox folders">
+        <Box component="nav" sx={{ flexShrink: { md: 0 }, zIndex: 1300, boxShadow: 'rgb(63, 77, 103) 1px 0px 20px 0px' }} aria-label="mailbox folders">
             {!matchDownMD ? (
                 <MiniDrawerStyled variant="permanent" open={open}>
                     {drawerHeader}
@@ -43,9 +43,9 @@ const MainDrawer = ({ open, handleDrawerToggle, window }) => {
                         '& .MuiDrawer-paper': {
                             boxSizing: 'border-box',
                             width: drawerWidth,
-                            borderRight: `1px solid ${theme.palette.divider}`,
                             backgroundImage: 'none',
-                            boxShadow: 'inherit'
+                            border: 'none',
+                            boxShadow: '1px 0 20px 0 #3f4d67'
                         }
                     }}
                 >

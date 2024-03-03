@@ -1,6 +1,6 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import oldImg from '../../assets/images/myImages/brand-logo.svg';
+import oldImg from '../../assets/images/myImages/phishingportallogo.png';
 import { useNavigate } from 'react-router-dom';
 
 /**
@@ -29,7 +29,7 @@ const Logo = () => {
         <>
             {/* <h5 style={{ marginTop: '25px', marginLeft: '40px' }}>Admin Panel </h5> */}
             <a>
-                <img src={oldImg} alt="Mantis" width="100" style={{ marginTop: '5px'}} />
+                <img src={oldImg} alt="Mantis" width="180px" style={{ marginTop: '5px'}} />
             </a>
             {/* <svg width="118" height="35" viewBox="0 0 118 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
