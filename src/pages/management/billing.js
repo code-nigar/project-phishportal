@@ -15,7 +15,7 @@ import { Typography, Button, Modal, Box, TextField, Select, MenuItem, IconButton
 import { PDFExport } from '@progress/kendo-react-pdf';
 import { getCompaigns, getCost, editCost, getCampaignCostByName, getCampaignCost, billPaid } from 'api/api';
 import Swal from 'sweetalert2';
-import img1 from '../../assets/images/myImages/1.PNG';
+import img1 from '../../assets/images/myImages/phishingportallogo.png';
 import img2 from '../../assets/images/myImages/2.PNG';
 import { ThemeProvider } from '@mui/material/styles';
 import { createTheme } from '@mui/material/styles';
@@ -33,7 +33,7 @@ const theme = createTheme({
             main: '#1890FF'
         },
         text: {
-            primary: '#ffffff'
+            primary: '#888'
         }
     },
     components: {
@@ -41,16 +41,10 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     '& label': {
-                        color: '#ffffff'
+                        color: '#888'
                     },
                     '& input': {
-                        color: '#ffffff'
-                    },
-                    '& .MuiInput-underline:before': {
-                        borderBottomColor: '#ffffff'
-                    },
-                    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-                        borderBottomColor: '#ffffff'
+                        color: '#888'
                     }
                 }
             }
@@ -59,31 +53,37 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     '& label': {
-                        color: '#ffffff'
+                        color: '#888'
                     },
                     '& .MuiSelect-icon': {
-                        color: '#ffffff'
+                        color: '#888'
                     },
                     '& .MuiInput-underline:before': {
-                        borderBottomColor: '#ffffff'
+                        borderBottomColor: '#888'
                     },
                     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-                        borderBottomColor: '#ffffff'
+                        borderBottomColor: '#888'
                     }
                 }
             }
         }
     }
 });
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: '#89a',
         color: theme.palette.common.white,
-        fontSize: 16
+        fontSize: 15,
+        fontFamily: 'Open Sans'
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
-        color: theme.palette.common.black
+        color: '#444',
+        maxWidth: '100px',
+        overflow: 'auto',
+        padding: '10px 12px',
+        fontFamily: 'Open Sans'
     }
 }));
 
@@ -102,8 +102,8 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '33%',
-    bgcolor: 'rgb(36, 41, 57)',
-    color: 'white !important',
+    bgcolor: '#f0f0f0',
+    color: '#888 !important',
     maxHeight: '600px',
     boxShadow: 24,
     p: 4,
@@ -276,31 +276,31 @@ const User = () => {
             reprehended in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa
             qui officiate descent molls anim id est labours.
         </Typography> */}
-                <span>Cost Per Agent : ${cost?.agents || 0}</span> &nbsp;&nbsp;&nbsp;
-                <span>Cost Per Compaign : ${cost?.campaigns || 0}</span>&nbsp;&nbsp;&nbsp;
+                <span style={{ color: '#888' }}>Cost Per Agent : ${cost?.agents || 0}</span> &nbsp;&nbsp;&nbsp;
+                <span style={{ color: '#888' }}>Cost Per Compaign : ${cost?.campaigns || 0}</span>&nbsp;&nbsp;&nbsp;
                 {JSON.parse(localStorage.getItem('userdata')).type !== 'SuperUser' && (
                     <>
-                        <span style={{ fontWeight: 'bold' }}>Total Agents : {0}</span>&nbsp;&nbsp;&nbsp;
-                        <span style={{ fontWeight: 'bold' }}>Total Compaigns : {compaignToPay || 0}</span>
+                        <span style={{ fontWeight: 'bold', color: '#888' }}>Total Agents : {0}</span>&nbsp;&nbsp;&nbsp;
+                        <span style={{ fontWeight: 'bold', color: '#888' }}>Total Compaigns : {compaignToPay || 0}</span>
                     </>
                 )}
                 {JSON.parse(localStorage.getItem('userdata')).type === 'SuperUser' ? (
-                    <Button
-                        style={{ float: 'right', backgroundColor: '#e1f1f5', color: '#58adc6' }}
-                        variant="outlined"
+                    <button
+                        style={{ float: 'right' }}
+                        className='btn btn-primary shadow px-sm-4'
                         onClick={() => setEditCost(true)}
                     >
                         Edit Cost
-                    </Button>
+                    </button>
                 ) : (
                     <>
-                        <Button
-                            style={{ float: 'right', fontWeight: 'bold', backgroundColor: '#58adc6', color: '#e1f1f5' }}
-                            variant="outlined"
+                        <button
+                            style={{ float: 'right' }}
+                            className='btn btn-primary shadow px-sm-4'
                             onClick={handleDownloadInvoice}
                         >
                             ${compaignToPay * cost?.campaigns || 0} - Download Invoice
-                        </Button>
+                        </button>
                         {/* &nbsp;&nbsp;{' '}
                         <span style={{ float: 'right', fontWeight: 'bold' }}>
                             Total Bill : ${compaignToPay * cost?.campaigns || 0}
@@ -314,15 +314,18 @@ const User = () => {
                     }}
                 >
                     <Box sx={style}>
-                        <h4>Edit Cost</h4>
+                        <Typography variant="h4" component="h4" className="my-2 mx-auto" sx={{ textAlign: 'center', color: 'var(--pc-heading-color)' }}>
+                            Edit Cost
+                        </Typography>
                         <ThemeProvider theme={theme}>
                             <TextField
+                                sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }}
                                 label="Cost Per Agent"
                                 value={cost.agents}
                                 onChange={(e) => setCost({ ...cost, agents: e.target.value })}
                                 type="number"
                                 fullWidth
-                                inputProps={{ style: { color: 'white' } }}
+                                inputProps={{ style: { color: '#888' } }}
                                 className="my-2"
                                 id="outlined-basic"
                                 variant="outlined"
@@ -330,6 +333,7 @@ const User = () => {
                             />
                             <br />
                             <TextField
+                                sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }}
                                 label="Cost Per Compaign"
                                 value={cost.campaigns}
                                 type="number"
@@ -337,20 +341,20 @@ const User = () => {
                                 fullWidth
                                 id="outlined-basic"
                                 variant="outlined"
-                                inputProps={{ style: { color: 'white' } }}
+                                inputProps={{ style: { color: '#888' } }}
                                 className="my-2"
                                 size="small"
                             />
                             <br />
                         </ThemeProvider>
-                        <Button
-                            variant="contained"
-                            style={{ backgroundColor: '#58adc6', color: '#e1f1f5' }}
-                            fullWidth
-                            onClick={handleEditCost}
-                        >
-                            Update Cost
-                        </Button>
+                        <div className='d-flex justify-content-center align-items-center mt-2'>
+                            <button
+                                className="btn btn-primary shadow px-sm-4 mx-auto"
+                                onClick={handleEditCost}
+                            >
+                                Update Cost
+                            </button>
+                        </div>
                     </Box>
                 </Modal>
                 <br />
@@ -380,14 +384,12 @@ const User = () => {
                                         <StyledTableCell align="left">{e?.total}</StyledTableCell>
                                         <StyledTableCell align="left">${e?.total * cost?.campaigns}</StyledTableCell>
                                         <StyledTableCell align="left">
-                                            <Button
-                                                color="success"
-                                                variant="contained"
-                                                style={{ fontWeight: 'bold' }}
+                                            <button
+                                                className='btn btn-primary px-sm-4 bg-brand-color-1'
                                                 onClick={() => handlePayment(e?.total * cost?.campaigns, e?.username)}
                                             >
                                                 Pay
-                                            </Button>
+                                            </button>
                                         </StyledTableCell>
                                     </StyledTableRow>
                                 ))}
@@ -420,9 +422,9 @@ const User = () => {
                                             <StyledTableCell align="left">{e?.startDate}</StyledTableCell>
                                             <StyledTableCell align="left">
                                                 {e?.payment === '1' ? (
-                                                    <Chip label="Paid" color="success" />
+                                                    <Chip label="Paid" className='bg-brand-color-1' />
                                                 ) : (
-                                                    <Chip label="UnPaid" color="error" />
+                                                    <Chip label="UnPaid" className='bg-brand-color-2' />
                                                 )}
                                             </StyledTableCell>
                                         </StyledTableRow>
@@ -453,7 +455,7 @@ const User = () => {
                     >
                         <div className="container  px-2  py-3 my-5" style={{ position: 'relative' }}>
                             {/* <h2>Just Testing</h2> */}
-                            <img src={img1} alt="cyberops logo" width="100%" />
+                            <img src={img1} alt="cyberops logo" width="250px" />
                             <div className="container d-flex justify-content-between">
                                 <img src={img2} alt="cyberops logo" width="30%" />
                                 <div style={{ marginRight: '15%', float: 'left', marginTop: '6%' }}>
@@ -575,7 +577,7 @@ const User = () => {
                         <Button
                             variant="contained"
                             fullWidth
-                            style={{ textAlign: 'center', backgroundColor: '#58adc6' }}
+                            className='btn btn-primary shadow px-sm-4 mx-auto'
                             onClick={handleDownloadPDF}
                         >
                             Download
