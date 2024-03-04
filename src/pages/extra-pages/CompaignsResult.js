@@ -330,7 +330,7 @@ export default function CompaignsResult() {
 
     return (
         <>
-            <MainCard title="Users And Groups">
+            <MainCard title="Users And Groups" style={{ width: '100%', borderRadius: 0, boxShadow: '0 1px 20px 0 rgba(69, 90, 100, 0.08)', padding: '16px' }}>
                 <div>
                     <Button variant="contained" className="me-3 mb-3" style={{ backgroundColor: 'grey' }} onClick={handleNavigate}>
                         Back

@@ -269,7 +269,7 @@ const User = () => {
 
     return (
         <>
-            <MainCard title="User Management">
+            <MainCard title="User Management" style={{ width: '100%', borderRadius: 0, boxShadow: '0 1px 20px 0 rgba(69, 90, 100, 0.08)', padding: '16px' }}>
                 {/* <Typography variant="body2" style={{ color: 'black ' }}>
             Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif
             ad minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in

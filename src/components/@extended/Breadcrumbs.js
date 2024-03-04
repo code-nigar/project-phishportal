@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 // material-ui
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Grid, Typography } from '@mui/material';
 
 // project imports
@@ -55,7 +56,7 @@ const Breadcrumbs = ({ navigation, title, ...others }) => {
     // collapse item
     if (main && main.type === 'collapse') {
         mainContent = (
-            <Typography component={Link} to={document.location.pathname} variant="h6" sx={{ textDecoration: 'none' }} color="textSecondary">
+            <Typography component={Link} to={document.location.pathname} variant="h6" sx={{ textDecoration: 'none' }} color="#888">
                 {main.title}
             </Typography>
         );
@@ -65,7 +66,7 @@ const Breadcrumbs = ({ navigation, title, ...others }) => {
     if (item && item.type === 'item') {
         itemTitle = item.title;
         itemContent = (
-            <Typography variant="subtitle1" style={{ color: 'black' }}>
+            <Typography variant="h6" style={{ color: '#888' }}>
                 {itemTitle}
             </Typography>
         );
@@ -73,26 +74,29 @@ const Breadcrumbs = ({ navigation, title, ...others }) => {
         // main
         if (item.breadcrumbs !== false) {
             breadcrumbContent = (
-                <MainCard border={false} sx={{ mb: 3, bgcolor: 'transparent' }} {...others} content={false}>
-                    <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start" spacing={1}>
-                        <Grid item>
-                            <MuiBreadcrumbs aria-label="breadcrumb">
-                                <Typography component={Link} to="/" color="black" variant="h6" sx={{ textDecoration: 'none' }}>
-                                    Home
-                                </Typography>
-                                {mainContent}
-                                {itemContent}
-                            </MuiBreadcrumbs>
+                <>
+                    
+                    {title && (
+                        <Grid item sx={{ mt: 2 }}>
+                            <Typography variant="h5" sx={{ color: 'var(--pc-heading-color)', fontWeight: 500 }}>
+                                {item.title}
+                            </Typography>
                         </Grid>
-                        {title && (
-                            <Grid item sx={{ mt: 2 }}>
-                                <Typography variant="h5" sx={{ color: 'black' }}>
-                                    {item.title}
-                                </Typography>
+                    )}
+                    <MainCard border={false} sx={{ mb: 3, bgcolor: 'transparent' }} {...others} content={false}>
+                        <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start" spacing={1}>
+                            <Grid item>
+                                <MuiBreadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" style={{color:"#5b6b79"}} />}>
+                                    <Typography component={Link} to="/" color="#888" variant="h6" sx={{ textDecoration: 'none' }}>
+                                        Home
+                                    </Typography>
+                                    {mainContent}
+                                    {itemContent}
+                                </MuiBreadcrumbs>
                             </Grid>
-                        )}
-                    </Grid>
-                </MainCard>
+                        </Grid>
+                    </MainCard>
+                </>
             );
         }
     }

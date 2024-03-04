@@ -217,7 +217,7 @@ const User = () => {
     };
     return (
         <>
-            <MainCard title="User Management" style={{ width: '100%' }}>
+            <MainCard title="User Management" style={{ width: '100%', borderRadius: 0, boxShadow: '0 1px 20px 0 rgba(69, 90, 100, 0.08)', padding: '16px' }}>
                 <Button variant="contained" onClick={handleModal} style={{ backgroundColor: '#58adc6', color: '#e1f1f5' }}>
                     Create User
                 </Button>

@@ -371,7 +371,7 @@ export default function Compaign() {
 
     return (
         <>
-            <MainCard title="Users And Groups">
+            <MainCard title="Users And Groups" style={{ width: '100%', borderRadius: 0, boxShadow: '0 1px 20px 0 rgba(69, 90, 100, 0.08)', padding: '16px' }}>
                 <Card sx={{ maxWidth: 275 }} className="mb-3" style={{ color: 'black' }}>
                     <CardContent>
                         <Typography variant="h4" style={{ color: 'black' }} gutterBottom>

@@ -159,7 +159,7 @@ const GoPhish = () => {
     };
 
     return (
-        <MainCard title="Sample Card" style={{ color: 'black ' }}>
+        <MainCard title="Sample Card" style={{ width: '100%', borderRadius: 0, boxShadow: '0 1px 20px 0 rgba(69, 90, 100, 0.08)', padding: '16px' }}>
             {/* <a href="https://127.0.0.1:3333/" target="_blank"> */}
             <Button variant="contained" onClick={handleOpen}>
                 Add User

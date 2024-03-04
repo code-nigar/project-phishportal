@@ -162,7 +162,7 @@ const Report = () => {
     };
     return (
         <>
-            <MainCard title="SIEM" style={{ color: 'black ' }}>
+            <MainCard title="SIEM" style={{ width: '100%', borderRadius: 0, boxShadow: '0 1px 20px 0 rgba(69, 90, 100, 0.08)', padding: '16px' }}>
                 <Grid container rowSpacing={4.5} columnSpacing={2.75}>
                     {/* row 1 */}
                     <Grid item xs={6} sm={3} md={2} lg={5.5}>
