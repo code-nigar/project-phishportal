@@ -16,7 +16,7 @@ const Palette = (mode) => {
         '#ffffff',
         '#fafafa',
         '#f5f5f5',
-        '#f0f0f0',
+        '#f4f7fa',
         '#d9d9d9',
         '#bfbfbf',
         '#8c8c8c',

@@ -16,6 +16,16 @@
     border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
+.IconHover:hover line,
+.IconHover:hover path,
+.IconHover:hover circle {
+  stroke: #04a9f5;
+}
+
+.user-avtar {
+  width: 40px;
+  border-radius: 50%;
+}
 
 ::-webkit-scrollbar {
     width: 8px;
@@ -3729,7 +3739,6 @@
   
   .dropdown-header {
     display: block;
-    padding: var(--bs-dropdown-header-padding-y) var(--bs-dropdown-header-padding-x);
     margin-bottom: 0;
     font-size: 0.765625rem;
     color: var(--bs-dropdown-header-color);

@@ -195,6 +195,7 @@ const AuthLogin = () => {
                             <Grid container direction="row" justifyContent="center" alignItems="center" sx={{ marginBottom: '25px'}} >
                                     <Button
                                         type="submit"
+                                        className="btn btn-primary shadow px-sm-4"
                                     >
                                         Login
                                     </Button>

@@ -15,7 +15,7 @@ import { useNavigate } from '../../../../../../node_modules/react-router/index';
 const ProfileTab = ({ handleLogout }) => {
     const theme = useTheme();
 
-    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [selectedIndex, setSelectedIndex] = useState(-1);
     const [modal, setModal] = useState(false);
     const handleListItemClick = (event, index) => {
         setSelectedIndex(index);
@@ -66,12 +66,12 @@ const ProfileTab = ({ handleLogout }) => {
     };
     return (
         <>
-            <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32, color: theme.palette.grey[500] } }}>
+            <List component="nav" sx={{ my:0, px: 1, '& .MuiListItemIcon-root': { minWidth: 32, color: theme.palette.grey[500] } }}>
                 <ListItemButton selected={selectedIndex === 0} onClick={handleChangePassword}>
                     <ListItemIcon>
-                        <EditOutlined />
+                        <EditOutlined style={{ color: '#212529bf' }}/>
                     </ListItemIcon>
-                    <ListItemText primary="Edit Password" />
+                    <ListItemText sx={{ color: '#888' }} primary="Change Password" />
                 </ListItemButton>
                 {/* <ListItemButton selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1)}>
                 <ListItemIcon>
@@ -93,11 +93,14 @@ const ProfileTab = ({ handleLogout }) => {
                 <ListItemText primary="Billing" />
             </ListItemButton> */}
 
-                <ListItemButton selected={selectedIndex === 2} onClick={handleLogout}>
-                    <ListItemIcon>
+                <ListItemButton selected={selectedIndex === 2} onClick={handleLogout} className="btn btn-primary" sx={{ width: '100%' }}>
+                    {/* <ListItemIcon>
                         <LogoutOutlined />
-                    </ListItemIcon>
-                    <ListItemText primary="Logout" />
+                    </ListItemIcon> */}
+                    <div className='d-flex flex-row justify-content-center align-items-center text-center'>
+                            <LogoutOutlined/> 
+                            <Typography sx={{ml: 1.5}}>Logout</Typography>
+                    </div>
                 </ListItemButton>
             </List>
         </>

@@ -214,11 +214,11 @@ const AuthChangePassword = () => {
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="email-login" sx={{ color: 'white' }}>
+                                    <InputLabel htmlFor="email-login" sx={{ color: '#888' }}>
                                         Email Address / Username
                                     </InputLabel>
                                     <OutlinedInput
-                                        sx={{ color: 'white' }}
+                                        sx={{ color: '#888' }}
                                         id="email-login"
                                         type="email"
                                         onChange={handleEChange}
@@ -231,11 +231,11 @@ const AuthChangePassword = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="password-login" sx={{ color: 'white' }}>
+                                    <InputLabel htmlFor="password-login" sx={{ color: '#888' }}>
                                         Old Password
                                     </InputLabel>
                                     <OutlinedInput
-                                        sx={{ color: 'white' }}
+                                        sx={{ color: '#888' }}
                                         fullWidth
                                         error={Boolean(touched.password && errors.password)}
                                         id="-password-login"
@@ -272,11 +272,11 @@ const AuthChangePassword = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="newpassword-login" sx={{ color: 'white' }}>
+                                    <InputLabel htmlFor="newpassword-login" sx={{ color: '#888' }}>
                                         New Password
                                     </InputLabel>
                                     <OutlinedInput
-                                        sx={{ color: 'white' }}
+                                        sx={{ color: '#888' }}
                                         fullWidth
                                         error={Boolean(touched.newPassword && errors.newPassword)}
                                         id="-newpassword-login"
@@ -313,11 +313,11 @@ const AuthChangePassword = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="confirmpassword-login" sx={{ color: 'white' }}>
+                                    <InputLabel htmlFor="confirmpassword-login" sx={{ color: '#888' }}>
                                         Confirm Password
                                     </InputLabel>
                                     <OutlinedInput
-                                        sx={{ color: 'white' }}
+                                        sx={{ color: '#888' }}
                                         fullWidth
                                         error={Boolean(touched.confirmPassword && errors.confirmPassword)}
                                         id="-confirmpassword-login"
@@ -363,8 +363,8 @@ const AuthChangePassword = () => {
                                     <FormHelperText error>{errors.submit}</FormHelperText>
                                 </Grid>
                             )}
-                            <Grid item xs={12}>
-                                <AnimateButton>
+                            <Grid container direction="row" justifyContent="center" alignItems="center" sx={{ marginTop: '25px' }} >
+                                {/* <AnimateButton>
                                     <Button
                                         disableElevation
                                         disabled={isSubmitting || loader}
@@ -378,7 +378,15 @@ const AuthChangePassword = () => {
                                         Update Password
                                     </Button>
                                     {loader && <LinearProgress />}
-                                </AnimateButton>
+                                </AnimateButton> */}
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary shadow px-sm-4"
+                                    onClick={() => handleChangePassword(values)}
+                                >
+                                Update Password
+                                </button>
+                                {loader && <LinearProgress />}
                             </Grid>
                         </Grid>
                     </form>

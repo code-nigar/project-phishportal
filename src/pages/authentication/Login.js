@@ -16,7 +16,7 @@ const Login = () => (
             <Grid item xs={12}>
                 <Stack direction="column" justifyContent="center" alignItems="center">
                     <Logo/>
-                    <Typography variant="h4" className="mb-2 mt-4" sx={{color: 'rgb(29, 38, 48)'}}>
+                    <Typography variant="h4" className="mb-2 mt-4" sx={{color: '--var(--pc-heading-color)'}}>
                         Welcome Back
                     </Typography>
                     {/* <Typography component={Link} to="/register" variant="body1" sx={{ textDecoration: 'none' }} color="primary">

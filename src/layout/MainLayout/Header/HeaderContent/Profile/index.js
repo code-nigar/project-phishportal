@@ -105,10 +105,8 @@ const Profile = () => {
             <ButtonBase
                 sx={{
                     p: 0.25,
-                    bgcolor: open ? iconBackColorOpen : 'transparent',
+                    bgcolor: '#f4f7fa',
                     color: 'black',
-                    borderRadius: 1,
-                    '&:hover': { bgcolor: 'secondary.lighter' }
                 }}
                 aria-label="open profile"
                 ref={anchorRef}
@@ -117,12 +115,13 @@ const Profile = () => {
                 onClick={handleToggle}
             >
                 <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
-                    <Avatar sx={{ bgcolor: deepPurple[500] }} style={{ textTransform: 'capitalize' }}>
+                    {/* <Avatar sx={{ bgcolor: deepPurple[500] }} style={{ textTransform: 'capitalize' }}>
                         {user?.username?.name?.[0]}
                     </Avatar>
                     <Typography variant="subtitle1" style={{ textTransform: 'capitalize' }}>
                         {user?.username?.name}
-                    </Typography>
+                    </Typography> */}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5b6b79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-user IconHover"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 </Stack>
             </ButtonBase>
             <Popper
@@ -152,16 +151,29 @@ const Profile = () => {
                                     width: 290,
                                     minWidth: 240,
                                     maxWidth: 290,
+                                    border: 'none',
+                                    borderRadius: '0',
                                     [theme.breakpoints.down('md')]: {
                                         maxWidth: 250
                                     }
                                 }}
                             >
                                 <ClickAwayListener onClickAway={handleClose}>
-                                    <MainCard elevation={0} border={false} content={false}>
-                                        <CardContent sx={{ px: 2.5, pt: 3 }}>
-                                            <Grid container justifyContent="space-between" alignItems="center">
-                                                <Grid item>
+                                    <MainCard elevation={0} border={false} content={false} sx={{ borderRadius: '0', border: 'none', }}>
+                                        <CardContent sx={{ p: 0, borderRadius: '0', border: 'none', }}>
+                                                <div className = "dropdown-header d-flex align-items-center justify-content-between bg-primary py-2 px-3">
+                                                    <div className = "d-flex my-2">
+                                                        <div className = "flex-shrink-0">
+                                                            <img src="assets/images/user/avatar-2.jpg" alt="user-profile" className="user-avtar wid-35"/>
+                                                        </div>
+                                                        <div className = "flex-grow-1 ms-3">
+                                                            <h6 className = "text-white mb-1">{user?.username?.name}</h6>
+                                                            <span className = "text-white text-opacity-75">{user?.type.toUpperCase()}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {/* <Grid container justifyContent="space-between" alignItems="center">
+                                                {/* <Grid item>
                                                     <Stack direction="row" spacing={1.25} alignItems="center">
                                                         <Avatar sx={{ bgcolor: deepPurple[500] }} style={{ textTransform: 'capitalize' }}>
                                                             {user?.username?.name?.[0]}
@@ -175,17 +187,18 @@ const Profile = () => {
                                                             </Typography>
                                                         </Stack>
                                                     </Stack>
-                                                </Grid>
+                                                </Grid> 
+                                                
                                                 {/* <Grid item>
                                                     <IconButton size="large" color="secondary" onClick={handleLogout}>
                                                         <LogoutOutlined />
                                                     </IconButton>
-                                                </Grid> */}
-                                            </Grid>
+                                                </Grid> }
+                                            </Grid> */}
                                         </CardContent>
                                         {open && (
                                             <>
-                                                <TabPanel value={value} index={0} dir={theme.direction}>
+                                                <TabPanel value={value} index={0} dir={theme.direction} sx={{ m:0 }}>
                                                     <ProfileTab handleLogout={handleLogout} />
                                                 </TabPanel>
                                                 {/* <TabPanel value={value} index={1} dir={theme.direction}>
