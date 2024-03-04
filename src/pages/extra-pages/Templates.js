@@ -40,7 +40,7 @@ const theme = createTheme({
             main: '#1890FF'
         },
         text: {
-            primary: '#ffffff'
+            primary: '#888'
         }
     },
     components: {
@@ -48,16 +48,10 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     '& label': {
-                        color: '#ffffff'
+                        color: '#888'
                     },
                     '& input': {
-                        color: '#ffffff'
-                    },
-                    '& .MuiInput-underline:before': {
-                        borderBottomColor: '#ffffff'
-                    },
-                    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-                        borderBottomColor: '#ffffff'
+                        color: '#888'
                     }
                 }
             }
@@ -66,16 +60,16 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     '& label': {
-                        color: '#ffffff'
+                        color: '#888'
                     },
                     '& .MuiSelect-icon': {
-                        color: '#ffffff'
+                        color: '#888'
                     },
                     '& .MuiInput-underline:before': {
-                        borderBottomColor: '#ffffff'
+                        borderBottomColor: '#888'
                     },
                     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-                        borderBottomColor: '#ffffff'
+                        borderBottomColor: '#888'
                     }
                 }
             }
@@ -84,15 +78,18 @@ const theme = createTheme({
 });
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: '#89a',
         color: theme.palette.common.white,
-        fontSize: 16
+        fontSize: 15,
+        fontFamily: 'Open Sans'
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
-        color: theme.palette.common.black,
+        color: '#444',
         maxWidth: '100px',
-        overflow: 'auto'
+        overflow: 'auto',
+        padding: '10px 12px',
+        fontFamily: 'Open Sans'
     }
 }));
 
@@ -112,12 +109,12 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '33%',
-    bgcolor: 'rgb(36, 41, 57)',
-    color: 'white !important',
-    maxHeight: '500px',
+    bgcolor: '#fff',
+    color: '#888 !important',
+    maxHeight: '600px',
     boxShadow: 24,
     p: 4,
-    overflowX: 'hidden',
+    overflowX: 'auto',
     overflowY: 'auto'
     // minHeight: "400px",
     // maxHeight: "600px",
@@ -342,15 +339,15 @@ export default function Templates() {
             <MainCard title="Users And Groups" style={{ width: '100%', borderRadius: 0, boxShadow: '0 1px 20px 0 rgba(69, 90, 100, 0.08)', padding: '16px' }}>
                 <Card sx={{ maxWidth: 275 }} className="mb-3" style={{ color: 'black' }}>
                     <CardContent>
-                        <Typography variant="h4" style={{ color: 'black' }} gutterBottom>
+                        <Typography variant="h4" style={{ color: '#555', fontWeight: 400 }} gutterBottom>
                             Templates Summary
                         </Typography>
-                        <Typography variant="h5" component="div" color="text.secondary">
+                        <Typography variant="h5" component="div" color="#888">
                             Total Templates : {data?.length}
                         </Typography>
                     </CardContent>
                 </Card>
-                <Button variant="contained" className="mb-3" onClick={handleOpen} style={{ backgroundColor: '#58adc6', color: '#e1f1f5' }}>
+                <Button variant="contained" className='btn btn-primary shadow px-sm-4 mb-3'  onClick={handleOpen}>
                     New Template
                 </Button>
 
@@ -359,7 +356,7 @@ export default function Templates() {
                         <Box
                             component="form"
                             sx={{
-                                '& > :not(style)': { m: 1, width: '41ch' }
+                                '& > :not(style)': { m: 1, width: '100%' }
                             }}
                             noValidate
                             autoComplete="off"
@@ -378,9 +375,9 @@ export default function Templates() {
                                     onChange={(e) => setName(e.target.value)}
                                 />
 
-                                <Button variant="contained" color="error" onClick={() => setImports(!imports)}>
+                                <button className='btn btn-primary px-sm-4 bg-brand-color-1' onClick={() => setImports(!imports)}>
                                     Import Email
-                                </Button>
+                                </button>
 
                                 {imports && (
                                     <>
@@ -500,14 +497,12 @@ export default function Templates() {
                                     </label>
                                 </div>
                                 <div className="container d-flex">
-                                    <Button
-                                        variant="contained"
-                                        style={{ float: 'right', backgroundColor: '#58adc6', color: '#e1f1f5' }}
+                                    <button
+                                        className='btn btn-primary shadow px-sm-4 mx-auto mt-2'
                                         onClick={handleAdd}
-                                        fullWidth
                                     >
                                         Create Template
-                                    </Button>
+                                    </button>
                                 </div>
                             </ThemeProvider>
                         </Box>
@@ -524,7 +519,7 @@ export default function Templates() {
                         <Box
                             component="form"
                             sx={{
-                                '& > :not(style)': { m: 1, width: '41ch' }
+                                '& > :not(style)': { m: 1, width: '100%' }
                             }}
                             noValidate
                             autoComplete="off"
@@ -696,7 +691,7 @@ export default function Templates() {
                         <Box
                             component="form"
                             sx={{
-                                '& > :not(style)': { m: 1, width: '41ch' }
+                                '& > :not(style)': { m: 1, width: '100%' }
                             }}
                             noValidate
                             autoComplete="off"
