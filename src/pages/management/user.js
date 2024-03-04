@@ -33,7 +33,7 @@ const theme = createTheme({
             main: '#1890FF'
         },
         text: {
-            primary: '#ffffff'
+            primary: '#888'
         }
     },
     components: {
@@ -41,16 +41,10 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     '& label': {
-                        color: '#ffffff'
+                        color: '#888'
                     },
                     '& input': {
-                        color: '#ffffff'
-                    },
-                    '& .MuiInput-underline:before': {
-                        borderBottomColor: '#ffffff'
-                    },
-                    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-                        borderBottomColor: '#ffffff'
+                        color: '#888'
                     }
                 }
             }
@@ -59,16 +53,16 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     '& label': {
-                        color: '#ffffff'
+                        color: '#888'
                     },
                     '& .MuiSelect-icon': {
-                        color: '#ffffff'
+                        color: '#888'
                     },
                     '& .MuiInput-underline:before': {
-                        borderBottomColor: '#ffffff'
+                        borderBottomColor: '#888'
                     },
                     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-                        borderBottomColor: '#ffffff'
+                        borderBottomColor: '#888'
                     }
                 }
             }
@@ -78,15 +72,18 @@ const theme = createTheme({
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: '#89a',
         color: theme.palette.common.white,
-        fontSize: 16
+        fontSize: 15,
+        fontFamily: 'Open Sans'
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
-        color: theme.palette.common.black,
+        color: '#444',
         maxWidth: '100px',
-        overflow: 'auto'
+        overflow: 'auto',
+        padding: '10px 12px',
+        fontFamily: 'Open Sans'
     }
 }));
 
@@ -175,7 +172,13 @@ const User = () => {
                 getUsers();
             })
             .catch((error) => {
-                Swal.fire('Oops', 'Something went wrong', 'error');
+                Swal.fire({
+                    title: 'Oops',
+                    text: 'Something went wrong',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#04a9f5' // Blue color
+                  });
             });
     };
 
@@ -218,65 +221,66 @@ const User = () => {
     return (
         <>
             <MainCard title="User Management" style={{ width: '100%', borderRadius: 0, boxShadow: '0 1px 20px 0 rgba(69, 90, 100, 0.08)', padding: '16px' }}>
-                <Button variant="contained" onClick={handleModal} style={{ backgroundColor: '#58adc6', color: '#e1f1f5' }}>
+                <button  onClick={handleModal} className='btn btn-primary shadow px-sm-4'>
                     Create User
-                </Button>
+                </button>
                 <Modal open={modal} onClose={handleModal}>
                     <div
                         style={{
                             height: '600px',
-                            backgroundColor: 'rgb(36, 41, 57)'
+                            backgroundColor: '#f0f0f0',
+                            color: '#888'
                         }}
                         className="modal-container"
                     >
                         <ThemeProvider theme={theme}>
-                            <Typography variant="h4" component="h4" className="my-2" style={{ textAlign: 'center' }}>
+                            <Typography variant="h4" component="h4" className="my-2 mx-auto" sx={{ textAlign: 'center', color: 'var(--pc-heading-color)' }}>
                                 Create User
                             </Typography>
                             <br />
-                            <TextField
+                            <TextField sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }} 
                                 label="Name"
                                 value={name}
-                                inputProps={{ style: { color: 'white' } }}
+                                inputProps={{ style: { color: '#888' } }}
                                 onChange={handleNameChange}
                                 fullWidth
                                 size="small"
                             />
                             <br />
-                            <TextField
+                            <TextField sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }}
                                 label="Email"
                                 type="email"
                                 value={email}
-                                inputProps={{ style: { color: 'white' } }}
+                                inputProps={{ style: { color: '#888' } }}
                                 onChange={handleEmailChange}
                                 fullWidth
                                 size="small"
                             />
                             <br />
-                            <TextField
+                            <TextField sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }}
                                 type="Password"
                                 label="Password"
                                 value={password}
-                                inputProps={{ style: { color: 'white' } }}
+                                inputProps={{ style: { color: '#888' } }}
                                 onChange={handlePasswordChange}
                                 fullWidth
                                 size="small"
                             />
                             <br />
-                            <TextField
+                            <TextField sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }}
                                 type="Password"
                                 label="Confirm Password"
                                 value={confirmpassword}
-                                inputProps={{ style: { color: 'white' } }}
+                                inputProps={{ style: { color: '#888' } }}
                                 onChange={handleCPasswordChange}
                                 fullWidth
                                 size="small"
                             />
                             <br />
-                            <TextField
+                            <TextField sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }}
                                 label="Address"
                                 value={address}
-                                inputProps={{ style: { color: 'white' } }}
+                                inputProps={{ style: { color: '#888' } }}
                                 onChange={handleAddress}
                                 fullWidth
                                 size="small"
@@ -287,17 +291,17 @@ const User = () => {
                                 Select Services
                             </Typography>
                             <div>
-                                <Checkbox checked={wazuhChecked} onChange={handleWazuhChange} name="wazuh" />
+                                <Checkbox checked={wazuhChecked} onChange={handleWazuhChange} name="wazuh" style={{ color: '#888' }}/>
                                 SIEM
-                                <Checkbox checked={gophishChecked} onChange={handleGophishChange} name="gophish" />
+                                <Checkbox checked={gophishChecked} onChange={handleGophishChange} name="gophish" style={{ color: '#888' }}/>
                                 Phishing
                             </div>
                         </ThemeProvider>
                         <br />
 
-                        <Button fullWidth variant="contained" style={{ backgroundColor: 'rgb(88, 173, 198)' }} onClick={handleCreateUser}>
+                        <button className="btn btn-primary shadow px-sm-4 mx-auto" onClick={handleCreateUser}>
                             Create User
-                        </Button>
+                        </button>
                     </div>
                 </Modal>
 
@@ -308,13 +312,11 @@ const User = () => {
                         align-items: start;
                         justify-content: center;
                         background-color: #000;
-                        color: white;
                         padding: 20px;
                         width: 500px;
                         height: 300px;
                         margin: 20px auto;
                         outline: none;
-                        border-radius: 5px;
                     }
                 `}</style>
 
