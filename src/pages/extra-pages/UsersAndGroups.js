@@ -82,7 +82,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
         padding: '10px 12px',
         fontFamily: 'Open Sans'
     }
-}));
+})); 
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
@@ -385,11 +385,13 @@ export default function UsersAndGroups() {
                                     </div>
                                 </div>
 
-                                <TextField
-                                    id="outlined-basic"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Group Name"
+                                    id="groupName"
                                     label="Group Name"
                                     variant="outlined"
-                                    style={{ color: 'black' }}
                                     color="primary"
                                     size="small"
                                     onChange={(e) => setName(e.target.value)}
@@ -567,7 +569,7 @@ export default function UsersAndGroups() {
                         <Box
                             component="form"
                             sx={{
-                                '& > :not(style)': { m: 1, width: '41ch' }
+                                '& > :not(style)': { m: 1, width: '100%' }
                             }}
                             noValidate
                             autoComplete="off"
@@ -577,11 +579,12 @@ export default function UsersAndGroups() {
                                     Name
                                 </Typography>
 
-                                <TextField
-                                    id="outlined-basic"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Group Name"
+                                    id="groupName"
                                     label="Group Name"
-                                    variant="outlined"
-                                    style={{ color: 'black' }}
                                     color="primary"
                                     size="small"
                                     value={name}
@@ -661,9 +664,9 @@ export default function UsersAndGroups() {
                                         onChange={(e) => setPosition(e.target.value)}
                                     />
                                 </div>
-                                <Button variant="text" color="error" size="small" onClick={handleSubmit}>
+                                <button className='btn btn-primary px-sm-4 bg-brand-color-1' onClick={handleSubmit}>
                                     <AddIcon fontSize="small" /> Add
-                                </Button>
+                                </button>
 
                                 {todos.map((e, index) => (
                                     <div class="accordion accordion-flush border rounded" key={index} id="accordionFlushExample">
@@ -715,14 +718,13 @@ export default function UsersAndGroups() {
                                 ))}
                                 <br />
                                 <div className="container  d-flex ">
-                                    <Button
-                                        variant="contained"
-                                        style={{ backgroundColor: '#58adc6', color: '#e1f1f5' }}
+                                    <button
+                                        className='btn btn-primary shadow px-sm-4 mx-auto'
                                         onClick={handleEdit}
                                         fullWidth
                                     >
                                         Update Group
-                                    </Button>
+                                    </button>
                                 </div>
                             </ThemeProvider>
                         </Box>

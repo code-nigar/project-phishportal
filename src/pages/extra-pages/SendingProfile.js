@@ -332,13 +332,11 @@ export default function SendingProfile() {
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Name *
                                 </Typography>
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Sending Profile Name"
-                                    variant="outlined"
-                                    style={{ color: 'black' }}
-                                    color="primary"
-                                    size="small"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Sending Profile Name"
+                                    id="SendingProfileName"
                                     onChange={(e) => setName(e.target.value)}
                                 />
 
@@ -554,13 +552,11 @@ export default function SendingProfile() {
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Name *
                                 </Typography>
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Sending Profile Name"
-                                    variant="outlined"
-                                    style={{ color: 'black' }}
-                                    color="primary"
-                                    size="small"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Sending Profile Name"
+                                    id="SendingProfileName"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                 />
@@ -674,9 +670,9 @@ export default function SendingProfile() {
                                             />
                                         </div>
                                         <div class="col-sm">
-                                            <Button variant="contained" fullWidth color="error" onClick={handleSubmit}>
+                                            <button className='btn btn-primary px-sm-4 bg-brand-color-1' onClick={handleSubmit}>
                                                 Add
-                                            </Button>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -709,14 +705,13 @@ export default function SendingProfile() {
 
                                 <br />
                                 <div className="container d-flex">
-                                    <Button
-                                        variant="contained"
-                                        style={{ float: 'right', backgroundColor: '#58adc6', color: '#e1f1f5' }}
+                                    <button
+                                        className='btn btn-primary shadow px-sm-4 mx-auto'
                                         onClick={handleEdit}
                                         fullWidth
                                     >
                                         Update Sending Profile
-                                    </Button>
+                                    </button>
                                 </div>
                             </ThemeProvider>
                         </Box>

@@ -102,7 +102,7 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '33%',
-    bgcolor: '#f0f0f0',
+    bgcolor: '#fff',
     color: '#888 !important',
     maxHeight: '600px',
     boxShadow: 24,
@@ -314,36 +314,35 @@ const User = () => {
                     }}
                 >
                     <Box sx={style}>
-                        <Typography variant="h4" component="h4" className="my-2 mx-auto" sx={{ textAlign: 'center', color: 'var(--pc-heading-color)' }}>
+                        <Typography variant="h2" component="h2" className="my-2 mx-auto" sx={{ textAlign: 'center', color: 'var(--pc-heading-color)' }}>
                             Edit Cost
                         </Typography>
+                        <br/>
                         <ThemeProvider theme={theme}>
-                            <TextField
-                                sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }}
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Cost Per Agent
+                            </Typography>
+                            <input
+                                class="form-control"
+                                placeholder="100"
+                                id="CostPerAgent"
                                 label="Cost Per Agent"
                                 value={cost.agents}
                                 onChange={(e) => setCost({ ...cost, agents: e.target.value })}
                                 type="number"
-                                fullWidth
-                                inputProps={{ style: { color: '#888' } }}
-                                className="my-2"
-                                id="outlined-basic"
-                                variant="outlined"
-                                size="small"
                             />
                             <br />
-                            <TextField
-                                sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }}
-                                label="Cost Per Compaign"
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Cost Per Campaign
+                            </Typography>
+                            <input
+                                class="form-control"
+                                placeholder="150"
+                                id="Cost Per Campaign"
+                                label="Cost Per Campaign"
                                 value={cost.campaigns}
                                 type="number"
                                 onChange={(e) => setCost({ ...cost, campaigns: e.target.value })}
-                                fullWidth
-                                id="outlined-basic"
-                                variant="outlined"
-                                inputProps={{ style: { color: '#888' } }}
-                                className="my-2"
-                                size="small"
                             />
                             <br />
                         </ThemeProvider>

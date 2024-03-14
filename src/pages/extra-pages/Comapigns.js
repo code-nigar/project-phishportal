@@ -398,13 +398,12 @@ export default function Compaign() {
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Name
                                 </Typography>
-                                <TextField
-                                    id="outlined-basic"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Campaign Name"
+                                    id="CampaignName"
                                     label="Campaign Name"
-                                    variant="outlined"
-                                    style={{ color: 'black' }}
-                                    color="primary"
-                                    size="small"
                                     onChange={(e) => setName(e.target.value)}
                                 />
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -677,13 +676,12 @@ export default function Compaign() {
                             <Typography id="modal-modal-title" variant="h6" component="h2">
                                 Name
                             </Typography>
-                            <TextField
-                                id="outlined-basic"
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Campaign Name"
+                                id="CampaignName"
                                 label="Campaign Name"
-                                variant="outlined"
-                                style={{ color: 'black' }}
-                                color="primary"
-                                size="small"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
@@ -884,14 +882,12 @@ export default function Compaign() {
                             </Button> */}
                             <br />
                             <div className="container d-flex">
-                                <Button
-                                    variant="contained"
-                                    style={{ float: 'right', backgroundColor: '#58adc6', color: '#e1f1f5' }}
+                                <button
+                                    className='btn btn-primary shadow px-sm-4 mx-auto'
                                     onClick={handleAdd}
-                                    fullWidth
                                 >
                                     Create Campaign
-                                </Button>
+                                </button>
                             </div>
                         </ThemeProvider>
                     </Box>

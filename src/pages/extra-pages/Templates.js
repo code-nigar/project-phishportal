@@ -365,13 +365,12 @@ export default function Templates() {
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Name
                                 </Typography>
-                                <TextField
-                                    id="outlined-basic"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Template Name"
+                                    id="templateName"
                                     label="Template Name"
-                                    variant="outlined"
-                                    style={{ color: 'black' }}
-                                    color="primary"
-                                    size="small"
                                     onChange={(e) => setName(e.target.value)}
                                 />
 
@@ -528,13 +527,12 @@ export default function Templates() {
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Name
                                 </Typography>
-                                <TextField
-                                    id="outlined-basic"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Template Name"
+                                    id="templateName"
                                     label="Template Name"
-                                    variant="outlined"
-                                    style={{ color: 'black' }}
-                                    color="primary"
-                                    size="small"
                                     value={name}
                                     onChange={(e) => {
                                         console.log(e.target.value);
@@ -700,13 +698,12 @@ export default function Templates() {
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Name
                                 </Typography>
-                                <TextField
-                                    id="outlined-basic"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Template Name"
+                                    id="templateName"
                                     label="Template Name"
-                                    variant="outlined"
-                                    style={{ color: 'black' }}
-                                    color="primary"
-                                    size="small"
                                     value={name}
                                     onChange={(e) => {
                                         console.log(e.target.value);

@@ -41,9 +41,9 @@ export default function FullScreenDialog({ text }) {
             {/* <Button variant="outlined" onClick={handleClickOpen}>
         Open full-screen dialog
       </Button> */}
-            <Button variant="contained" style={{ width: '50%', backgroundColor: '#58adc6', color: '#e1f1f5' }} onClick={handleClickOpen}>
+            <button className='btn btn-primary px-sm-4 bg-brand-color-1' style={{ width: 'inherit' }} onClick={handleClickOpen}>
                 Preview
-            </Button>
+            </button>
             <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
                 <AppBar sx={{ position: 'relative', backgroundColor: '#58adc6', color: '#e1f1f5' }}>
                     <Toolbar>

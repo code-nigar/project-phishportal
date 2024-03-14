@@ -365,13 +365,12 @@ export default function LandingPage() {
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Name
                                 </Typography>
-                                <TextField
-                                    id="outlined-basic"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Landing Page"
+                                    id="LandingPage"
                                     label="Landing Page"
-                                    variant="outlined"
-                                    style={{ color: 'black' }}
-                                    color="primary"
-                                    size="small"
                                     onChange={(e) => setName(e.target.value)}
                                 />
                                 <button className='btn btn-primary px-sm-4 bg-brand-color-1' onClick={() => setImport(!imports)}>
@@ -421,17 +420,16 @@ export default function LandingPage() {
                                     />
                                 </div>
                                 {/* {text && stringToHtml(text)} */}
-                                {text && <FullScreenDialog text={text} style={{ backgroundColor: 'white !important' }} />} <br />
+                                {text && <FullScreenDialog text={text} style={{ backgroundColor: 'white !important' }} />} 
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Redirect URL
                                 </Typography>
-                                <TextField
-                                    id="outlined-basic"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Redirect URL"
+                                    id="redirectURL"
                                     label="Redirect URL"
-                                    variant="outlined"
-                                    style={{ color: 'black' }}
-                                    color="primary"
-                                    size="small"
                                     value={redirectURL}
                                     onChange={(e) => setRedirectURL(e.target.value)}
                                 />
@@ -529,13 +527,12 @@ export default function LandingPage() {
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Name
                                 </Typography>
-                                <TextField
-                                    id="outlined-basic"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Landing Page"
+                                    id="LandingPage"
                                     label="Landing Page"
-                                    variant="outlined"
-                                    style={{ color: 'black' }}
-                                    color="primary"
-                                    size="small"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                 />
@@ -554,17 +551,15 @@ export default function LandingPage() {
                                         onChange={(e) => setText(e.target.value)}
                                     />
                                 </div>
-                                {text && <FullScreenDialog text={text} style={{ backgroundColor: 'white !important' }} />} <br />
+                                {text && <FullScreenDialog text={text} style={{ backgroundColor: 'white !important' }} />} 
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Redirect URL
                                 </Typography>
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Redirect URL"
-                                    variant="outlined"
-                                    style={{ color: 'black' }}
-                                    color="primary"
-                                    size="small"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Redirect URL"
+                                    id="redirectURL"
                                     value={redirectURL || editData.redirect_url}
                                     onChange={(e) => setRedirectURL(e.target.value)}
                                 />
@@ -582,14 +577,13 @@ export default function LandingPage() {
                                 </div>
                                 <br />
                                 <div className="container d-flex">
-                                    <Button
-                                        variant="contained"
-                                        style={{ float: 'right', backgroundColor: '#58adc6', color: '#e1f1f5' }}
+                                    <button
+                                        className='btn btn-primary shadow px-sm-4 mx-auto'
                                         onClick={handleEdit}
                                         fullWidth
                                     >
                                         Update Page
-                                    </Button>
+                                    </button>
                                 </div>
                             </ThemeProvider>
                         </Box>
@@ -617,13 +611,12 @@ export default function LandingPage() {
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Name
                                 </Typography>
-                                <TextField
-                                    id="outlined-basic"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Landing Page"
+                                    id="LandingPage"
                                     label="Landing Page"
-                                    variant="outlined"
-                                    style={{ color: 'black' }}
-                                    color="primary"
-                                    size="small"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                 />
@@ -642,17 +635,15 @@ export default function LandingPage() {
                                         onChange={(e) => setText(e.target.value)}
                                     />
                                 </div>
-                                {text && <FullScreenDialog text={text} style={{ backgroundColor: 'white !important' }} />} <br />
+                                {text && <FullScreenDialog text={text} style={{ backgroundColor: 'white !important' }} />} 
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Redirect URL
                                 </Typography>
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Redirect URL"
-                                    variant="outlined"
-                                    style={{ color: 'black' }}
-                                    color="primary"
-                                    size="small"
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Redirect URL"
+                                    id="redirectURL"
                                     value={redirectURL || editData.redirect_url}
                                     onChange={(e) => setRedirectURL(e.target.value)}
                                 />
@@ -669,14 +660,13 @@ export default function LandingPage() {
                                     </label>
                                 </div>
                                 <div className="container d-flex">
-                                    <Button
-                                        variant="contained"
-                                        style={{ float: 'right', backgroundColor: '#58adc6', color: '#e1f1f5' }}
+                                    <button
+                                        className='btn btn-primary shadow px-sm-4 mt-2 mx-auto'
                                         onClick={handleAdd}
                                         fullWidth
                                     >
                                         Create Page
-                                    </Button>
+                                    </button>
                                 </div>
                             </ThemeProvider>
                         </Box>
