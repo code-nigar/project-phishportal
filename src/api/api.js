@@ -7,9 +7,9 @@ import { isJwtExpired } from 'jwt-check-expiration';
 // const api2 = 'http://172.168.10.55:1338/';
 // const token = '5b9df0f4e8295a7ba7a9a6031fb9c503d018b51e41bc60fbca14f53f929c9afc';
 
-const api = 'http://192.199.204.118:1338/'; //127.0.0.1
-const goPhishApi = 'http://192.199.204.118:1338/'; //20.63.81.190:1338
-const api2 = 'http://192.199.204.118:1338/';
+const api = 'http://localhost:1338/'; //127.0.0.1
+const goPhishApi = 'http://localhost:1338/'; //20.63.81.190:1338
+const api2 = 'http://localhost:1338/';
 
 let token = '';
 
@@ -254,7 +254,7 @@ async function getCompaignResult(id) {
 }
 async function getAllCompaignResult(id) {
     return await axios.get(
-        `https://localhost:3333/api/campaigns/${id}/results/?api_key=e3901eac36ff04d6a7ad913be206b46c05c51ad5d57b4986d08e5b3fa2671075`,
+        `https://127.0.0.1:3333/api/campaigns/${id}/results/?api_key=e29aef6ffce258e85fd09e3b1e1b9b03aa62fb7e1ed61df1b54d17030010801b`,
         {
             Authorization: JSON.parse(localStorage.getItem('userdata'))?.gophishkey
         }
@@ -267,7 +267,7 @@ async function getCompaignSummary(id) {
 }
 async function getAllCampaignSummary() {
     return await axios.post(
-        `https://localhost:3333/api/campaigns/summary/?api_key=e3901eac36ff04d6a7ad913be206b46c05c51ad5d57b4986d08e5b3fa2671075`,
+        `https://127.0.0.1:3333/api/campaigns/summary/?api_key=e29aef6ffce258e85fd09e3b1e1b9b03aa62fb7e1ed61df1b54d17030010801b`,
         {
             Authorization: JSON.parse(localStorage.getItem('userdata'))?.gophishkey
         }
@@ -289,6 +289,49 @@ async function WazuhIntegration() {
     return await axios.post(`${api2}data`, {
         token: localStorage.getItem('siemToken')
     });
+}
+
+async function createCheckoutSession() {
+    if (getToken() !== true) {
+        return await axios.post(
+            `${api}create-checkout-session`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+    }
+}
+async function createPaymentIntent() {
+    if (getToken() !== true) {
+        return await axios.get(
+            `${api}create-payment-intent`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+    }
+}
+async function addStripeSecret(obj) {
+    if (getToken() !== true) {
+        return await axios.put(`${api}addStripeSecret`, obj, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    }
+}
+async function getStripeSecret() {
+    if (getToken() !== true) {
+        return await axios.get(`${api}getStripeSecret`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    }
 }
 
 export {
@@ -333,5 +376,9 @@ export {
     deleteUser,
     createPortalUser,
     getPortalUsers,
-    deletePortalUser
+    deletePortalUser,
+    createPaymentIntent,
+    addStripeSecret,
+    getStripeSecret,
+    createCheckoutSession
 };

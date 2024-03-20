@@ -13,7 +13,16 @@ import MainCard from 'components/MainCard';
 import { useEffect, useRef, useState } from 'react';
 import { Typography, Button, Modal, Box, TextField, Select, MenuItem, IconButton } from '@mui/material';
 import { PDFExport } from '@progress/kendo-react-pdf';
-import { getCompaigns, getCost, editCost, getCampaignCostByName, getCampaignCost, billPaid } from 'api/api';
+import {
+    getCompaigns,
+    getCost,
+    editCost,
+    getCampaignCostByName,
+    getCampaignCost,
+    billPaid,
+    addStripeSecret,
+    getStripeSecret
+} from 'api/api';
 import Swal from 'sweetalert2';
 import img1 from '../../assets/images/myImages/phishingportallogo.png';
 import img2 from '../../assets/images/myImages/2.PNG';
@@ -118,16 +127,40 @@ const User = () => {
     const [totalCompaign, setTotal] = useState('');
     const [editCosts, setEditCost] = useState(false);
     const [openInvoice, setOpenInvoice] = useState(false);
+    const [paymentConfg, setpaymentConfg] = useState(false);
+    const [secretKey, setSecretKey] = useState('');
+    const [monthlyPayment, setMonthlyPayment] = useState([]);
     const [name, setName] = useState('');
     const [cost, setCost] = useState({});
     const [compaignByName, setCompaignByName] = useState([]);
     const [compaignToPay, setCompaignToPay] = useState(0);
 
     const getFetch = () => {
+        const filterDataForMonth = (data, year, month) => {
+            console.log('data >>> year >>> month>>>', data,year,month)
+            const firstDayOfMonth = new Date(year, month - 1, 1);
+            const lastDayOfMonth = new Date(year, month, 0);
+          
+            return data.filter(item => {
+              const startDate = new Date(item.startDate);
+          
+              // Check if startDate is within the range of the first day to the last day of the specified month
+              return startDate >= firstDayOfMonth && startDate <= lastDayOfMonth;
+            });
+          };
         getCost()
             .then((res) => {
                 setCost(res.data.costs[0]);
-                console.log(res.data.costs[0]);
+                // console.log(res.data.costs[0]);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+            getStripeSecret()
+            .then((res) => {
+                // setCost(res.data.costs[0]);
+                setSecretKey( res?.data?.stripeSecret )
+                // console.log('getStripeSecret >>> ',res?.data?.stripeSecret);
             })
             .catch((err) => {
                 console.log(err);
@@ -145,7 +178,47 @@ const User = () => {
                 : getCampaignCost(JSON.parse(localStorage.getItem('userdata'))?.username?.name)
                       .then((res) => {
                           setCompaignByName(res.data);
-                          console.log(res.data);
+                          const response = res?.data
+                            const currentDate = new Date();
+                            const currentYear = currentDate.getFullYear();
+                            const currentMonth = currentDate.getMonth() + 1;
+                            // const firstDayOfCurrentMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+                            // const firstDayOfLastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+                            // const filteredData = response.filter(item => {
+                            // const startDate = new Date(item.startDate);
+                            // return startDate >= firstDayOfLastMonth && startDate < firstDayOfCurrentMonth;
+                            // });
+                            // console.log('filteredData >>>',filteredData)
+                            const totalCampaignsPerMonth = [];
+
+                            const monthNames = [
+                                'January', 'February', 'March', 'April', 'May', 'June', 'July',
+                                'August', 'September', 'October', 'November', 'December'
+                            ];
+
+
+                            // Iterate over each month
+                            for (let month = 1; month < currentMonth; month++) {
+                                // Use the filterDataForMonth function to filter data for the current month
+                                const filteredDataForMonth = filterDataForMonth(response, currentYear, month);
+                                console.log('filteredDataForMonth >>> ',filteredDataForMonth)
+                                // Count the number of campaigns for the current month
+                                const totalCampaignsForMonth = filteredDataForMonth.length;
+                                //   console.log(response)
+                                // Push the total count to the array
+                                totalCampaignsPerMonth.push({
+                                    year: currentYear,
+                                    month: month,
+                                    monthName: monthNames[month - 1],
+                                    totalCampaigns: totalCampaignsForMonth,
+                                    // username:response
+                                });
+                            }
+                            console.log('totalCampaignsPerMonth >>>', totalCampaignsPerMonth);
+                            // const filteredDataForCurrentMonth = filterDataForMonth(response, currentYear, currentMonth);
+                            // console.log('filteredDataForCurrentMonth >>>', filteredDataForCurrentMonth);
+                            setMonthlyPayment(totalCampaignsPerMonth)
+                            console.log('setCompaign >>>',res.data);
                           const data = res?.data?.filter((e) => e.payment !== '1');
                           setCompaignToPay(data?.length);
                       })
@@ -215,6 +288,46 @@ const User = () => {
         }
     };
 
+    const handlepaymentConfg = () => {
+        setpaymentConfg(false);
+        // if (!cost.campaigns || !cost.agents) {
+        //     Swal.fire('Invalid Data', 'Fill All Values', 'error');
+        // } else {
+        let obj ={stripeSecret:secretKey}
+            addStripeSecret(obj)
+                .then((res) => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Secret key updated successfully!',
+                        showConfirmButton: true,
+                        confirmButtonColor: 'rgb(88, 173, 198)'
+                    });
+                    getFetch();
+                })
+                .catch((err) => {
+                    Swal.fire('Oops', 'Something went wrong', 'error');
+                });
+        // }
+    };
+
+    // payment integration
+    const makePayment = async()=>{
+        const body = {
+            amount: compaignToPay * cost?.campaigns || 0
+        }
+        const headers = {
+            "Content-Type":"application/json"
+        }
+        const response = await fetch("http://192.168.0.107:1338/create-checkout-session",{
+            method:"POST",
+            headers:headers,
+            body:JSON.stringify(body)
+        });
+
+        const session = await response.json();
+    }
+
     const handleDownloadInvoice = () => {
         setOpenInvoice(true);
     };
@@ -269,7 +382,10 @@ const User = () => {
 
     return (
         <>
-            <MainCard title="User Management" style={{ width: '100%', borderRadius: 0, boxShadow: '0 1px 20px 0 rgba(69, 90, 100, 0.08)', padding: '16px' }}>
+            <MainCard
+                title="User Management"
+                style={{ width: '100%', borderRadius: 0, boxShadow: '0 1px 20px 0 rgba(69, 90, 100, 0.08)', padding: '16px' }}
+            >
                 {/* <Typography variant="body2" style={{ color: 'black ' }}>
             Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif
             ad minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in
@@ -285,20 +401,37 @@ const User = () => {
                     </>
                 )}
                 {JSON.parse(localStorage.getItem('userdata')).type === 'SuperUser' ? (
-                    <button
-                        style={{ float: 'right' }}
-                        className='btn btn-primary shadow px-sm-4'
-                        onClick={() => setEditCost(true)}
-                    >
-                        Edit Cost
-                    </button>
+                    <>
+                        <Button
+                            style={{ float: 'right', backgroundColor: '#e1f1f5', color: '#58adc6' }}
+                            variant="outlined"
+                            onClick={() => setEditCost(true)}
+                        >
+                            Edit Cost
+                        </Button>
+                        <Button
+                            style={{ float: 'right', backgroundColor: '#e1f1f5', color: '#58adc6', marginRight: 2 }}
+                            variant="outlined"
+                            onClick={() => setpaymentConfg(true)}
+                        >
+                            Add Payment Configuration
+                        </Button>
+                    </>
                 ) : (
                     <>
-                        <button
-                            style={{ float: 'right' }}
-                            className='btn btn-primary shadow px-sm-4'
-                            onClick={handleDownloadInvoice}
-                        >
+                        <form action="http://192.168.0.107:1338/create-checkout-session" method="POST">
+                            <input type="hidden" name="key1" value="value1" />
+                            <input type="hidden" name="key2" value="value2" />
+                            <button
+                                style={{ float: 'right' }}
+                                className="btn btn-primary mx-2 px-sm-4 bg-brand-color-1"
+                                //onClick={makePayment}
+                            >
+                                {' '}
+                                ${compaignToPay * cost?.campaigns || 0} - Pay Now
+                            </button>
+                        </form>
+                        <button style={{ float: 'right' }} className="btn btn-primary shadow px-sm-4" onClick={handleDownloadInvoice}>
                             ${compaignToPay * cost?.campaigns || 0} - Download Invoice
                         </button>
                         {/* &nbsp;&nbsp;{' '}
@@ -314,10 +447,15 @@ const User = () => {
                     }}
                 >
                     <Box sx={style}>
-                        <Typography variant="h2" component="h2" className="my-2 mx-auto" sx={{ textAlign: 'center', color: 'var(--pc-heading-color)' }}>
+                        <Typography
+                            variant="h2"
+                            component="h2"
+                            className="my-2 mx-auto"
+                            sx={{ textAlign: 'center', color: 'var(--pc-heading-color)' }}
+                        >
                             Edit Cost
                         </Typography>
-                        <br/>
+                        <br />
                         <ThemeProvider theme={theme}>
                             <Typography id="modal-modal-title" variant="h6" component="h2">
                                 Cost Per Agent
@@ -346,14 +484,44 @@ const User = () => {
                             />
                             <br />
                         </ThemeProvider>
-                        <div className='d-flex justify-content-center align-items-center mt-2'>
-                            <button
-                                className="btn btn-primary shadow px-sm-4 mx-auto"
-                                onClick={handleEditCost}
-                            >
+                        <div className="d-flex justify-content-center align-items-center mt-2">
+                            <button className="btn btn-primary shadow px-sm-4 mx-auto" onClick={handleEditCost}>
                                 Update Cost
                             </button>
                         </div>
+                    </Box>
+                </Modal>
+                <Modal
+                    open={paymentConfg}
+                    onClose={() => {
+                        setpaymentConfg(false);
+                    }}
+                >
+                    <Box sx={style}>
+                        <h4>Add Payment Configuration</h4>
+                        <ThemeProvider theme={theme}>
+                            <TextField
+                                label="Stripe Secret Key"
+                                value={secretKey}
+                                type="password"
+                                onChange={(e) => setSecretKey(e.target.value)}
+                                fullWidth
+                                id="outlined-basic"
+                                variant="outlined"
+                                inputProps={{ style: { color: 'white' } }}
+                                className="my-2"
+                                size="small"
+                            />
+                            <br />
+                        </ThemeProvider>
+                        <Button
+                            variant="contained"
+                            style={{ backgroundColor: '#58adc6', color: '#e1f1f5' }}
+                            fullWidth
+                            onClick={handlepaymentConfg}
+                        >
+                            Update Payment
+                        </Button>
                     </Box>
                 </Modal>
                 <br />
@@ -384,7 +552,7 @@ const User = () => {
                                         <StyledTableCell align="left">${e?.total * cost?.campaigns}</StyledTableCell>
                                         <StyledTableCell align="left">
                                             <button
-                                                className='btn btn-primary px-sm-4 bg-brand-color-1'
+                                                className="btn btn-primary px-sm-4 bg-brand-color-1"
                                                 onClick={() => handlePayment(e?.total * cost?.campaigns, e?.username)}
                                             >
                                                 Pay
@@ -420,10 +588,10 @@ const User = () => {
                                             <StyledTableCell align="left">{e?.campaignId}</StyledTableCell>
                                             <StyledTableCell align="left">{e?.startDate}</StyledTableCell>
                                             <StyledTableCell align="left">
-                                                {e?.payment === '1' ? (
-                                                    <Chip label="Paid" className='bg-brand-color-1' />
+                                                {e?.payment == '1' ? (
+                                                    <Chip label="Paid" className="bg-brand-color-1" />
                                                 ) : (
-                                                    <Chip label="UnPaid" className='bg-brand-color-2' />
+                                                    <Chip label="UnPaid" className="bg-brand-color-2" />
                                                 )}
                                             </StyledTableCell>
                                         </StyledTableRow>
@@ -576,7 +744,7 @@ const User = () => {
                         <Button
                             variant="contained"
                             fullWidth
-                            className='btn btn-primary shadow px-sm-4 mx-auto'
+                            className="btn btn-primary shadow px-sm-4 mx-auto"
                             onClick={handleDownloadPDF}
                         >
                             Download
