@@ -26,16 +26,21 @@ const Color = Loadable(lazy(() => import('pages/components-overview/Color')));
 const Shadow = Loadable(lazy(() => import('pages/components-overview/Shadow')));
 const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
 const AuthLogin = Loadable(lazy(() => import('pages/authentication/Login')));
+const AuthSignup = Loadable(lazy(() => import('pages/authentication/Register')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 const token = localStorage.getItem('siemToken');
 const MainRoutes = {
     path: '/',
-    element: token ? <MainLayout /> : <AuthLogin />,
+    element: token ? <MainLayout /> : <AuthSignup />,
     children: [
         {
             path: '/',
             element: <DashboardDefault />
+        },
+        {
+            path: '/Signup',
+            element: <AuthSignup />
         },
         {
             path: 'color',

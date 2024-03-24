@@ -19,13 +19,15 @@ const Login = () => (
                     <Typography variant="h4" className="mb-2 mt-4" sx={{color: '--var(--pc-heading-color)'}}>
                         Welcome Back
                     </Typography>
-                    {/* <Typography component={Link} to="/register" variant="body1" sx={{ textDecoration: 'none' }} color="primary">
-                        Don&apos;t have an account?
-                    </Typography> */}
                 </Stack>
             </Grid>
             <Grid item xs={12}>
                 <AuthLogin />
+                <div className='d-flex justify-content-center align-items-center'>
+                    <Typography component={Link} to="/signup" variant="p" color="primary">
+                        Don&apos;t have an account? Sign Up Now
+                    </Typography>
+                </div>
             </Grid>
         </Grid>
     </AuthWrapper>

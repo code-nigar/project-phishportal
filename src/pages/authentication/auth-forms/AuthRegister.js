@@ -56,21 +56,20 @@ const AuthRegister = () => {
         <>
             <Formik
                 initialValues={{
-                    firstname: '',
-                    lastname: '',
+                    name: '',
                     email: '',
-                    company: '',
                     password: '',
+                    address: '',
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
-                    firstname: Yup.string().max(255).required('First Name is required'),
-                    lastname: Yup.string().max(255).required('Last Name is required'),
+                    name: Yup.string().max(255).required('First Name is required'),
                     email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
                     password: Yup.string().max(255).required('Password is required')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
+                        console.log("ready payload",values);
                         setStatus({ success: false });
                         setSubmitting(false);
                     } catch (err) {
@@ -84,28 +83,29 @@ const AuthRegister = () => {
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit}>
                         <Grid container spacing={3}>
-                            <Grid item xs={12} md={6}>
+                            <Grid item xs={12}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="firstname-signup">First Name*</InputLabel>
+                                    {/* <InputLabel htmlFor="name-signup">Name*</InputLabel> */}
                                     <OutlinedInput
-                                        id="firstname-login"
-                                        type="firstname"
-                                        value={values.firstname}
-                                        name="firstname"
+                                        id="name-login"
+                                        type="name"
+                                        value={values.name}
+                                        name="name"
                                         onBlur={handleBlur}
                                         onChange={handleChange}
-                                        placeholder="John"
+                                        placeholder="Enter Name"
                                         fullWidth
-                                        error={Boolean(touched.firstname && errors.firstname)}
+                                        error={Boolean(touched.name && errors.name)}
+                                        style={{ color: 'black', backgroundColor: 'transparent' }}
                                     />
-                                    {touched.firstname && errors.firstname && (
-                                        <FormHelperText error id="helper-text-firstname-signup">
-                                            {errors.firstname}
+                                    {touched.name && errors.name && (
+                                        <FormHelperText error id="helper-text-name-signup">
+                                            {errors.name}
                                         </FormHelperText>
                                     )}
                                 </Stack>
                             </Grid>
-                            <Grid item xs={12} md={6}>
+                            {/* <Grid item xs={12} md={6}>
                                 <Stack spacing={1}>
                                     <InputLabel htmlFor="lastname-signup">Last Name*</InputLabel>
                                     <OutlinedInput
@@ -119,6 +119,7 @@ const AuthRegister = () => {
                                         onChange={handleChange}
                                         placeholder="Doe"
                                         inputProps={{}}
+                                        style={{ color: 'black', backgroundColor: 'transparent' }}
                                     />
                                     {touched.lastname && errors.lastname && (
                                         <FormHelperText error id="helper-text-lastname-signup">
@@ -126,31 +127,32 @@ const AuthRegister = () => {
                                         </FormHelperText>
                                     )}
                                 </Stack>
-                            </Grid>
+                            </Grid> */}
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="company-signup">Company</InputLabel>
+                                    {/* <InputLabel htmlFor="address-signup">Company</InputLabel> */}
                                     <OutlinedInput
                                         fullWidth
-                                        error={Boolean(touched.company && errors.company)}
-                                        id="company-signup"
-                                        value={values.company}
-                                        name="company"
+                                        error={Boolean(touched.address && errors.address)}
+                                        id="address-signup"
+                                        value={values.address}
+                                        name="address"
                                         onBlur={handleBlur}
                                         onChange={handleChange}
-                                        placeholder="Demo Inc."
+                                        placeholder="Enter Adress"
                                         inputProps={{}}
+                                        style={{ color: 'black', backgroundColor: 'transparent' }}
                                     />
-                                    {touched.company && errors.company && (
-                                        <FormHelperText error id="helper-text-company-signup">
-                                            {errors.company}
+                                    {touched.address && errors.address && (
+                                        <FormHelperText error id="helper-text-address-signup">
+                                            {errors.address}
                                         </FormHelperText>
                                     )}
                                 </Stack>
                             </Grid>
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="email-signup">Email Address*</InputLabel>
+                                    {/* <InputLabel htmlFor="email-signup">Email Address*</InputLabel> */}
                                     <OutlinedInput
                                         fullWidth
                                         error={Boolean(touched.email && errors.email)}
@@ -160,8 +162,9 @@ const AuthRegister = () => {
                                         name="email"
                                         onBlur={handleBlur}
                                         onChange={handleChange}
-                                        placeholder="demo@company.com"
+                                        placeholder="Enter email address"
                                         inputProps={{}}
+                                        style={{ color: 'black', backgroundColor: 'transparent' }}
                                     />
                                     {touched.email && errors.email && (
                                         <FormHelperText error id="helper-text-email-signup">
@@ -172,7 +175,7 @@ const AuthRegister = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="password-signup">Password</InputLabel>
+                                    {/* <InputLabel htmlFor="password-signup">Password</InputLabel> */}
                                     <OutlinedInput
                                         fullWidth
                                         error={Boolean(touched.password && errors.password)}
@@ -198,8 +201,9 @@ const AuthRegister = () => {
                                                 </IconButton>
                                             </InputAdornment>
                                         }
-                                        placeholder="******"
+                                        placeholder="Enter Password"
                                         inputProps={{}}
+                                        style={{ color: 'black', backgroundColor: 'transparent' }}
                                     />
                                     {touched.password && errors.password && (
                                         <FormHelperText error id="helper-text-password-signup">
@@ -237,29 +241,19 @@ const AuthRegister = () => {
                                     <FormHelperText error>{errors.submit}</FormHelperText>
                                 </Grid>
                             )}
-                            <Grid item xs={12}>
-                                <AnimateButton>
-                                    <Button
-                                        disableElevation
-                                        disabled={isSubmitting}
-                                        fullWidth
-                                        size="large"
-                                        type="submit"
-                                        variant="contained"
-                                        color="primary"
-                                    >
-                                        Create Account
-                                    </Button>
-                                </AnimateButton>
+                            <Grid container direction="row" justifyContent="center" alignItems="center" sx={{ marginTop: '20px' }}>
+                                <Button disableElevation disabled={isSubmitting} type="submit" className="btn btn-primary shadow px-sm-4">
+                                    Create Account
+                                </Button>
                             </Grid>
-                            <Grid item xs={12}>
+                            {/* <Grid item xs={12}>
                                 <Divider>
                                     <Typography variant="caption">Sign up with</Typography>
                                 </Divider>
                             </Grid>
                             <Grid item xs={12}>
                                 <FirebaseSocial />
-                            </Grid>
+                            </Grid> */}
                         </Grid>
                     </form>
                 )}
