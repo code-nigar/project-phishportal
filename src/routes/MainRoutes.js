@@ -27,6 +27,8 @@ const Shadow = Loadable(lazy(() => import('pages/components-overview/Shadow')));
 const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
 const AuthLogin = Loadable(lazy(() => import('pages/authentication/Login')));
 const AuthSignup = Loadable(lazy(() => import('pages/authentication/Register')));
+const PaymentSuccessful = Loadable(lazy(() => import('pages/management/PaymentSuccessful')));
+const PaymentFail = Loadable(lazy(() => import('pages/management/PaymentFail')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 const token = localStorage.getItem('siemToken');
@@ -66,6 +68,14 @@ const MainRoutes = {
         {
             path: '/user-page',
             element: <UsersAndGroups />
+        },
+        {
+            path: '/payment-successful/:param',
+            element: <PaymentSuccessful />
+        },
+        {
+            path: 'payment-fail',
+            element: <PaymentFail />
         },
         {
             path: '/templates',

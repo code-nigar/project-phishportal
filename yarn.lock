@@ -1992,6 +1992,11 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@stripe/stripe-js@^3.0.10":
+  version "3.0.10"
+  resolved "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-3.0.10.tgz"
+  integrity sha512-CFRNha+aPXR8GrqJss2TbK1j4aSGZXQY8gx0hvaYiSp+dU7EK/Zs5uwFTSAgV+t8H4+jcZ/iBGajAvoMYOwy+A==
+
 "@surma/rollup-plugin-off-main-thread@^1.1.1":
   version "1.4.2"
   resolved "https://registry.npmjs.org/@surma/rollup-plugin-off-main-thread/-/rollup-plugin-off-main-thread-1.4.2.tgz"
