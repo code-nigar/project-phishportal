@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 // material-ui
 import {
@@ -26,6 +28,7 @@ import { Formik } from 'formik';
 import FirebaseSocial from './FirebaseSocial';
 import AnimateButton from 'components/@extended/AnimateButton';
 import { strengthColor, strengthIndicator } from 'utils/password-strength';
+import { createUser } from 'api/api';
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
@@ -35,6 +38,7 @@ import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 const AuthRegister = () => {
     const [level, setLevel] = useState();
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
@@ -69,7 +73,16 @@ const AuthRegister = () => {
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
+                        setSubmitting(true);
                         console.log("ready payload",values);
+                        createUser(values).then((res)=>{
+                            //console.log(res);
+                            Swal.fire('User Registered Successfully', 'success');
+                            navigate('/login');
+                        }).catch((err)=>{
+                            console.log(err);
+                            Swal.fire(err.response.data.message, 'error');
+                        });
                         setStatus({ success: false });
                         setSubmitting(false);
                     } catch (err) {

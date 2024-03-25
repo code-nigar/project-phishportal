@@ -183,7 +183,9 @@ const User = () => {
     };
 
     const handleCreateUser = () => {
-        if (!email || !password || !name || !confirmpassword || !address || (!wazuhChecked && !gophishChecked)) {
+        if (!email || !password || !name || !confirmpassword || !address 
+           // || (!wazuhChecked && !gophishChecked)
+        ) {
             Swal.fire('Failed', 'Fill All the Details', 'error');
         } else {
             if (password == confirmpassword) {
@@ -210,7 +212,7 @@ const User = () => {
                         setModal(!modal);
                     })
                     .catch((error) => {
-                        Swal.fire('Oops', error.response.data, 'error');
+                        Swal.fire('Oops', error.response.data.message, 'error');
                     });
             } else {
                 Swal.fire('Oops', 'Password and Confirm Password must be same', 'error');
@@ -287,7 +289,7 @@ const User = () => {
                             />
                             <br />
 
-                            <Typography variant="h6" component="h4" className="my-2">
+                            {/* <Typography variant="h6" component="h4" className="my-2">
                                 Select Services
                             </Typography>
                             <div>
@@ -295,7 +297,7 @@ const User = () => {
                                 SIEM
                                 <Checkbox checked={gophishChecked} onChange={handleGophishChange} name="gophish" style={{ color: '#888' }}/>
                                 Phishing
-                            </div>
+                            </div> */}
                         </ThemeProvider>
                         <br />
 
@@ -359,7 +361,8 @@ const User = () => {
                                         <StyledTableCell align="left">
                                             <IconButton
                                                 onClick={() =>
-                                                    handleDeleteUser(e?.gophishId, JSON.parse(localStorage.getItem('userdata'))?.gophishkey)
+                                                    // handleDeleteUser(e?.gophishId, JSON.parse(localStorage.getItem('userdata'))?.gophishkey)
+                                                    handleDeleteUser(e?.username)
                                                 }
                                             >
                                                 <DeleteIcon color="error" />

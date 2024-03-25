@@ -10,6 +10,7 @@ import { isJwtExpired } from 'jwt-check-expiration';
 const api = 'http://localhost:1338/'; //127.0.0.1
 const goPhishApi = 'http://localhost:1338/'; //20.63.81.190:1338
 const api2 = 'http://localhost:1338/';
+import Swal from 'sweetalert2';
 
 let token = '';
 
@@ -30,10 +31,9 @@ const getToken = () => {
 
 async function createUser(obj) {
     console.log(obj);
-    return await axios.post(`${goPhishApi}createUser`, { ...obj });
+    return await axios.post(`${goPhishApi}createPortalUser`, { ...obj });
 }
 async function createPortalUser(userDetails) {
-    if (getToken() !== true) {
         return await axios.post(
             `${api}createPortalUser`,
             { ...userDetails },
@@ -43,7 +43,6 @@ async function createPortalUser(userDetails) {
                 }
             }
         );
-    }
 }
 async function editCost(userDetails) {
     if (getToken() !== true) {
@@ -112,13 +111,14 @@ async function getCampaignCost(username) {
         });
     }
 }
-async function deletePortalUser(id, auth) {
+async function deletePortalUser(email) {
     if (getToken() !== true) {
         return await axios.post(
             `${api}deletePortalUser`,
             {
-                id,
-                auth
+                // id,
+                // auth
+                email
             },
             {
                 headers: {
@@ -218,65 +218,120 @@ async function getUsers() {
 //implementaiton of api based authentication
 async function getGroups() {
     //console.log('api key gophish', JSON.parse(localStorage.getItem('userdata'))?.gophishkey);
-    return await axios.post(`${goPhishApi}getGroups`, {
-        Authorization: JSON.parse(localStorage.getItem('userdata'))?.gophishkey
-    });
+    let gopkey = JSON.parse(localStorage.getItem('userdata'))?.gophishkey;
+    if (gopkey !== null) {
+        return await axios.post(`${goPhishApi}getGroups`, {
+            Authorization: gopkey
+        });
+    } else {
+        Swal.fire('Purchase Gophish Plan to access this module', 'warning');
+    }
 }
 async function getGroupsSummary() {
-    return await axios.post(`${goPhishApi}getGroupsSummary`, {
-        Authorization: JSON.parse(localStorage.getItem('userdata'))?.gophishkey
-    });
+    let gopkey = JSON.parse(localStorage.getItem('userdata'))?.gophishkey;
+    if (gopkey !== null) {
+        return await axios.post(`${goPhishApi}getGroupsSummary`, {
+            Authorization: gopkey
+        });
+    } else {
+        Swal.fire('Purchase Gophish Plan to access this module', 'warning');
+    }
 }
 async function getTemplates() {
-    return await axios.post(`${goPhishApi}getTemplates`, {
-        Authorization: JSON.parse(localStorage.getItem('userdata'))?.gophishkey
-    });
+    let gopkey = JSON.parse(localStorage.getItem('userdata'))?.gophishkey;
+    if (gopkey !== null) {
+        return await axios.post(`${goPhishApi}getTemplates`, {
+            Authorization: gopkey
+        });
+    } else {
+        Swal.fire('Purchase Gophish Plan to access this module', 'warning');
+    }
 }
 async function getPages() {
-    return await axios.post(`${goPhishApi}getPages`, {
-        Authorization: JSON.parse(localStorage.getItem('userdata'))?.gophishkey
-    });
+    let gopkey = JSON.parse(localStorage.getItem('userdata'))?.gophishkey;
+    if (gopkey !== null) {
+        return await axios.post(`${goPhishApi}getPages`, {
+            Authorization: gopkey
+        });
+    } else {
+        Swal.fire('Purchase Gophish Plan to access this module', 'warning');
+    }
 }
 async function getSendingProfile() {
-    return await axios.post(`${goPhishApi}getSendingProfile`, {
-        Authorization: JSON.parse(localStorage.getItem('userdata'))?.gophishkey
-    });
+    let gopkey = JSON.parse(localStorage.getItem('userdata'))?.gophishkey;
+    if (gopkey !== null) {
+        return await axios.post(`${goPhishApi}getSendingProfile`, {
+            Authorization: gopkey
+        });
+    } else {
+        Swal.fire('Purchase Gophish Plan to access this module', 'warning');
+    }
 }
 async function getCompaigns() {
-    return await axios.post(`${goPhishApi}getCompaigns`, {
-        Authorization: JSON.parse(localStorage.getItem('userdata'))?.gophishkey
-    });
+    let gopkey = JSON.parse(localStorage.getItem('userdata'))?.gophishkey;
+    if (gopkey !== null) {
+        return await axios.post(`${goPhishApi}getCompaigns`, {
+            Authorization: gopkey
+        });
+    } else {
+        Swal.fire('Purchase Gophish Plan to access this module', 'warning');
+    }
 }
 async function getCompaignResult(id) {
-    return await axios.post(`${goPhishApi}getCompaignResult/${id}`, {
-        Authorization: JSON.parse(localStorage.getItem('userdata'))?.gophishkey
-    });
+    let gopkey = JSON.parse(localStorage.getItem('userdata'))?.gophishkey;
+    if (gopkey !== null) {
+        return await axios.post(`${goPhishApi}getCompaignResult/${id}`, {
+            Authorization: gopkey
+        });
+    } else {
+        Swal.fire('Purchase Gophish Plan to access this module', 'warning');
+    }
 }
 async function getAllCompaignResult(id) {
-    return await axios.get(
-        `https://127.0.0.1:3333/api/campaigns/${id}/results/?api_key=e29aef6ffce258e85fd09e3b1e1b9b03aa62fb7e1ed61df1b54d17030010801b`,
-        {
-            Authorization: JSON.parse(localStorage.getItem('userdata'))?.gophishkey
-        }
-    );
+    let gopkey = JSON.parse(localStorage.getItem('userdata'))?.gophishkey;
+    if (gopkey !== null) {
+        return await axios.get(
+            `https://127.0.0.1:3333/api/campaigns/${id}/results/?api_key=fc1ccdfd8859e182fdee0079cb6bfffef68d1df3d5b5fdda02cd280f41248151`,
+            {
+                Authorization: gopkey
+            }
+        );
+    } else {
+        Swal.fire('Purchase Gophish Plan to access this module', 'warning');
+    }
 }
 async function getCompaignSummary(id) {
-    return await axios.post(`${goPhishApi}getCompaignSummary/${id}`, {
-        Authorization: JSON.parse(localStorage.getItem('userdata'))?.gophishkey
-    });
+    let gopkey = JSON.parse(localStorage.getItem('userdata'))?.gophishkey;
+    if (gopkey !== null) {
+        return await axios.post(`${goPhishApi}getCompaignSummary/${id}`, {
+            Authorization: gopkey
+        });
+    } else {
+        Swal.fire('Purchase Gophish Plan to access this module', 'warning');
+    }
 }
 async function getAllCampaignSummary() {
-    return await axios.post(
-        `https://127.0.0.1:3333/api/campaigns/summary/?api_key=e29aef6ffce258e85fd09e3b1e1b9b03aa62fb7e1ed61df1b54d17030010801b`,
-        {
-            Authorization: JSON.parse(localStorage.getItem('userdata'))?.gophishkey
-        }
-    );
+    let gopkey = JSON.parse(localStorage.getItem('userdata'))?.gophishkey;
+    if (gopkey !== null) {
+        return await axios.post(
+            `https://127.0.0.1:3333/api/campaigns/summary/?api_key=fc1ccdfd8859e182fdee0079cb6bfffef68d1df3d5b5fdda02cd280f41248151`,
+            {
+                Authorization: gopkey
+            }
+        );
+    } else {
+        Swal.fire('Purchase Gophish Plan to access this module', 'warning');
+    }
 }
 async function getCompleteCompaign(id) {
-    return await axios.post(`${goPhishApi}getCompleteCompaign/${id}`, {
-        Authorization: JSON.parse(localStorage.getItem('userdata'))?.gophishkey
-    });
+    let gopkey = JSON.parse(localStorage.getItem('userdata'))?.gophishkey;
+    if (gopkey !== null) {
+        return await axios.post(`${goPhishApi}getCompleteCompaign/${id}`, {
+            Authorization: gopkey
+        });
+    } else {
+        Swal.fire('Purchase Gophish Plan to access this module', 'warning');
+    }
 }
 async function Login(username, password) {
     return await axios.post(`${api}cyberops_signin`, {
