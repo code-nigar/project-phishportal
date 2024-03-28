@@ -44,6 +44,19 @@ async function createPortalUser(userDetails) {
             }
         );
 }
+async function updatePortalUser(userDetails) {
+    if (getToken() !== true) {
+        return await axios.put(
+            `${api}editPortalUser`,
+            { ...userDetails },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+    }
+}
 async function editCost(userDetails) {
     if (getToken() !== true) {
         return await axios.put(
@@ -435,5 +448,6 @@ export {
     createPaymentIntent,
     addStripeSecret,
     getStripeSecret,
-    createCheckoutSession
+    createCheckoutSession,
+    updatePortalUser
 };

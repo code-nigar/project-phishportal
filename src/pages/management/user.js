@@ -17,10 +17,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import EditIcon from '@mui/icons-material/Edit';
 // ==============================|| SAMPLE PAGE ||============================== //
 //const [userData, setUserData] = useState([]);
 import { ThemeProvider } from '@mui/material/styles';
 import { createTheme } from '@mui/material/styles';
+import EditUser from './editUser';
 // ==============================|| SAMPLE PAGE ||============================== //
 const theme = createTheme({
     palette: {
@@ -120,11 +122,17 @@ const User = () => {
     }, []);
 
     const [modal, setModal] = useState(false);
+    const [modal2, setModal2] = useState(false);
     const handleListItemClick = (event, index) => {
         setSelectedIndex(index);
     };
     const handleModal = () => {
         setModal(!modal);
+    };
+    const handleModal2 = (u) => {
+        setModal2(!modal2);
+        setSelectedUser(u);
+        getUsers();
     };
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -134,6 +142,7 @@ const User = () => {
     const [address, setAddress] = useState('');
     const [wazuhChecked, setWazuhChecked] = useState(false);
     const [gophishChecked, setGophishChecked] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
 
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -178,13 +187,18 @@ const User = () => {
                     icon: 'error',
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#04a9f5' // Blue color
-                  });
+                });
             });
     };
 
     const handleCreateUser = () => {
-        if (!email || !password || !name || !confirmpassword || !address 
-           // || (!wazuhChecked && !gophishChecked)
+        if (
+            !email ||
+            !password ||
+            !name ||
+            !confirmpassword ||
+            !address
+            // || (!wazuhChecked && !gophishChecked)
         ) {
             Swal.fire('Failed', 'Fill All the Details', 'error');
         } else {
@@ -222,8 +236,11 @@ const User = () => {
     };
     return (
         <>
-            <MainCard title="User Management" style={{ width: '100%', borderRadius: 0, boxShadow: '0 1px 20px 0 rgba(69, 90, 100, 0.08)', padding: '16px' }}>
-                <button  onClick={handleModal} className='btn btn-primary shadow px-sm-4'>
+            <MainCard
+                title="User Management"
+                style={{ width: '100%', borderRadius: 0, boxShadow: '0 1px 20px 0 rgba(69, 90, 100, 0.08)', padding: '16px' }}
+            >
+                <button onClick={handleModal} className="btn btn-primary shadow px-sm-4">
                     Create User
                 </button>
                 <Modal open={modal} onClose={handleModal}>
@@ -236,11 +253,17 @@ const User = () => {
                         className="modal-container"
                     >
                         <ThemeProvider theme={theme}>
-                            <Typography variant="h4" component="h4" className="my-2 mx-auto" sx={{ textAlign: 'center', color: 'var(--pc-heading-color)' }}>
+                            <Typography
+                                variant="h4"
+                                component="h4"
+                                className="my-2 mx-auto"
+                                sx={{ textAlign: 'center', color: 'var(--pc-heading-color)' }}
+                            >
                                 Create User
                             </Typography>
                             <br />
-                            <TextField sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }} 
+                            <TextField
+                                sx={{ border: '1px solid #888', color: '#888', borderRadius: '4px', lineHeight: '1.5', fontWeight: '400' }}
                                 label="Name"
                                 value={name}
                                 inputProps={{ style: { color: '#888' } }}
@@ -249,7 +272,8 @@ const User = () => {
                                 size="small"
                             />
                             <br />
-                            <TextField sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }}
+                            <TextField
+                                sx={{ border: '1px solid #888', color: '#888', borderRadius: '4px', lineHeight: '1.5', fontWeight: '400' }}
                                 label="Email"
                                 type="email"
                                 value={email}
@@ -259,7 +283,8 @@ const User = () => {
                                 size="small"
                             />
                             <br />
-                            <TextField sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }}
+                            <TextField
+                                sx={{ border: '1px solid #888', color: '#888', borderRadius: '4px', lineHeight: '1.5', fontWeight: '400' }}
                                 type="Password"
                                 label="Password"
                                 value={password}
@@ -269,7 +294,8 @@ const User = () => {
                                 size="small"
                             />
                             <br />
-                            <TextField sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }}
+                            <TextField
+                                sx={{ border: '1px solid #888', color: '#888', borderRadius: '4px', lineHeight: '1.5', fontWeight: '400' }}
                                 type="Password"
                                 label="Confirm Password"
                                 value={confirmpassword}
@@ -279,7 +305,8 @@ const User = () => {
                                 size="small"
                             />
                             <br />
-                            <TextField sx={{  border: '1px solid #888', color: '#888', borderRadius: '4px' , lineHeight: '1.5', fontWeight: '400' }}
+                            <TextField
+                                sx={{ border: '1px solid #888', color: '#888', borderRadius: '4px', lineHeight: '1.5', fontWeight: '400' }}
                                 label="Address"
                                 value={address}
                                 inputProps={{ style: { color: '#888' } }}
@@ -306,6 +333,8 @@ const User = () => {
                         </button>
                     </div>
                 </Modal>
+
+                <EditUser editModal={modal2} handleEditModal={handleModal2} UserDetails={selectedUser} />
 
                 <style jsx>{`
                     .modal-container {
@@ -366,6 +395,9 @@ const User = () => {
                                                 }
                                             >
                                                 <DeleteIcon color="error" />
+                                            </IconButton>
+                                            <IconButton onClick={() => handleModal2(e)}>
+                                                <EditIcon color="success" />
                                             </IconButton>
                                         </StyledTableCell>
                                     </StyledTableRow>
